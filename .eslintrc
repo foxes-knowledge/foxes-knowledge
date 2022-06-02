@@ -1,13 +1,7 @@
 {
-    "extends": [
-        "next/core-web-vitals",
-        "prettier"
-    ],
+    "extends": ["next/core-web-vitals", "prettier"],
     "rules": {
-        "quotes": [
-            "warn",
-            "single"
-        ],
+        "quotes": ["warn", "single"],
         "@next/next/no-css-tags": "off"
     },
     "ignorePatterns": [

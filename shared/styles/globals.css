@@ -53,13 +53,14 @@ img {
 
 a {
     text-decoration: none;
-    color: #6772eb;
+    color: #ff791a;
 }
 
-html, body {
+html,
+body {
     width: 100vw;
     min-height: 100vh;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     overflow: hidden scroll;
     scroll-behavior: smooth;
 }
@@ -67,7 +68,7 @@ html, body {
     width: 0;
 }
 ::selection {
-    background: #6772eb;
+    background: #ff791a;
     color: rgb(250, 249, 250);
 }
 

@@ -8,7 +8,6 @@ const Home: NextPage<{ user: { username: string } }> = ({ user }) => {
     const dispatch = useAppDispatch()
     const count = useAppSelector(selectCount)
     const [incrementAmount, setIncrementAmount] = useState<number>(0)
-    console.log(user)
 
     return (
         <>

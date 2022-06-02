@@ -9,10 +9,11 @@
         "prepare": "husky install",
         "dev": "next dev",
         "build": "next build",
+        "export": "next export",
         "start": "next start",
         "lint": "next lint",
         "typecheck": "tsc --noEmit -p tsconfig.json",
-        "format": "prettier --loglevel warn --write src"
+        "format": "prettier --loglevel warn --write ."
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.2",
@@ -47,7 +48,10 @@
         "peerDependencyRules": {
             "ignoreMissing": [
                 "commitlint"
-            ]
+            ],
+            "allowedVersions": {
+                "react": "18"
+            }
         }
     },
     "re1pository": {

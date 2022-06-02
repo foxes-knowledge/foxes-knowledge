@@ -5,3 +5,4 @@
 
 pnpm typecheck
 pnpm lint
+pnpm format

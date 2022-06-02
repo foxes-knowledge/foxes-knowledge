@@ -2,9 +2,11 @@
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"],
+            "@/*": ["components/*"],
             "redux/*": ["redux/*"],
-            "styles/*": ["styles/*"]
+            "utils/*": ["utils/*"],
+            "icons/*": ["shared/icons/*"],
+            "styles/*": ["shared/styles/*"]
         },
         "outDir": "dist",
         "strict": true,
