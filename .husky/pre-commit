@@ -3,5 +3,5 @@
 
 [ -n "$CI" ] && exit 0
 
-git add .
-pnpm dlx lint-staged
+pnpm typecheck
+pnpm lint

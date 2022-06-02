@@ -59,7 +59,7 @@ Publish images:
     when: on_success
     image:
         name: amazon/aws-cli:latest
-        entrypoint: [""]
+        entrypoint: ['']
     tags:
         - docker
     before_script:
