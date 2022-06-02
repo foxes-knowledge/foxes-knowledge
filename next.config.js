@@ -13,6 +13,9 @@ module.exports = (phase, { defaultConfig }) => {
             includePaths: [join(__dirname, './styles')],
             prependData: '@import "variables";@import "animations";@import "medias";',
         },
+        experimental: {
+            outputStandalone: true,
+        },
     }
 
     return nextConfig
