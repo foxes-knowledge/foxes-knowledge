@@ -20,9 +20,9 @@ variables:
 .load_image: &load_image
     - docker load -i build.tar
 
-.require_image: &require_image
+.require_prod: &require_prod
     needs:
-        - job: Build images
+        - job: Build production image
           artifacts: true
 
 before_script:
@@ -30,19 +30,19 @@ before_script:
     - cp .env.example .env
     - docker version
 
-Build images:
+Build production image:
     stage: build
     tags:
         - docker
     script:
-        - docker build -f docker/Dockerfile -t $APP_IMAGE --build-arg API_URL=$AWS_EB_INSTANCE_URL:8000/api .
+        - docker build -t $APP_IMAGE .
         - docker save -o build.tar $APP_IMAGE
     needs: []
     artifacts:
         paths:
             - build.tar
 
-Release images:
+Release image:
     stage: release
     when: on_success
     tags:
@@ -52,9 +52,9 @@ Release images:
         - docker tag $APP_IMAGE $APP_RELEASE_IMAGE
         - docker push $APP_RELEASE_IMAGE
         - docker push $APP_IMAGE
-    <<: *require_image
+    <<: *require_prod
 
-Publish images:
+Publish image:
     stage: publish
     when: on_success
     image:
@@ -71,6 +71,6 @@ Publish images:
         - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ECR_REGISTRY
         - docker tag $APP_IMAGE $AWS_ECR_IMAGE
         - docker push $AWS_ECR_IMAGE
-    <<: *require_image
+    <<: *require_prod
     only:
         - master
