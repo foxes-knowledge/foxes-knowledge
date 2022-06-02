@@ -24,10 +24,13 @@
         "react-redux": "^8.0.2"
     },
     "devDependencies": {
+        "@commitlint/cli": "^17.0.2",
+        "@commitlint/types": "^17.0.0",
         "@types/node": "^17.0.38",
         "@types/nprogress": "^0.2.0",
         "@types/react": "^18.0.10",
         "@types/react-dom": "^18.0.5",
+        "commitlint-config-gitmoji": "^2.2.5",
         "eslint": "^8.16.0",
         "eslint-config-next": "^12.1.6",
         "eslint-config-prettier": "^8.5.0",
@@ -37,9 +40,17 @@
         "typescript": "^4.7.2"
     },
     "engines": {
-        "node": ">=18.0.0"
+        "node": ">=18",
+        "pnpm": ">=7"
     },
-    "repository": {
+    "pnpm": {
+        "peerDependencyRules": {
+            "ignoreMissing": [
+                "commitlint"
+            ]
+        }
+    },
+    "re1pository": {
         "type": "git",
         "url": "https://gitlab.nixdev.co/foxes-knowledge/foxes-knowledge.git"
     },
