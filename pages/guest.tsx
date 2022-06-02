@@ -1,7 +1,7 @@
-import { LogoMain } from '@/assets/icons/Brand'
 import { getCookie } from 'cookies-next'
 import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
+import { LogoMain } from 'shared/icons/Brand'
 import style from 'styles/guest.module.scss'
 
 const Home: NextPage = () => {

@@ -1,4 +1,4 @@
-import { capitalizeFirstChar } from '@/utils/capitalizeFirstChar'
+import { capitalizeFirstChar } from 'utils/capitalizeFirstChar'
 import style from './labeledTextarea.module.scss'
 
 interface Props {

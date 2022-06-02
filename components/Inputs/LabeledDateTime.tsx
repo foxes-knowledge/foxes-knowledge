@@ -1,36 +1,34 @@
-import { capitalizeFirstChar } from '@/utils/capitalizeFirstChar'
+import { capitalizeFirstChar } from 'utils/capitalizeFirstChar'
 import style from './labeledInput.module.scss'
 
 interface Props {
     label?: string
-    type?: React.HTMLInputTypeAttribute
     name: string
-    value: string | number
+    value: string
     onChange: React.ChangeEventHandler<HTMLInputElement>
     required?: boolean
     min?: string | number
     max?: string | number
-    step?: string | number
 }
 
-export const LabeledInput: React.FC<Props> = props => (
+export const LabeledDateTime: React.FC<Props> = props => (
     <label className={style.labeledInput}>
         {props.label || capitalizeFirstChar(props.name)}
         <input
-            type={props.type}
-            name={props.name}
+            type="datetime-local"
             value={props.value}
-            onChange={props.onChange}
-            required={props.required}
             min={props.min}
             max={props.max}
-            step={props.step}
+            name={props.name}
+            onChange={props.onChange}
+            required={props.required}
         />
     </label>
 )
 
-LabeledInput.defaultProps = {
+LabeledDateTime.defaultProps = {
     label: undefined,
-    type: 'text',
+    min: '2022-04-29',
+    max: '9999-12-31',
     required: false,
 }
