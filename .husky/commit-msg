@@ -3,6 +3,4 @@
 
 [ -n "$CI" ] && exit 0
 
-pnpm typecheck
-pnpm lint
-pnpm format
+pnpm commitlint --edit $1

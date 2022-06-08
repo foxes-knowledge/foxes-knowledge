@@ -1,24 +1,32 @@
 {
-	"$schema": "https://json.schemastore.org/tsconfig",
-	"compilerOptions": {
-		"baseUrl": "src",
-		"outDir": "dist",
-		"strict": true,
-		"paths": {
-			"@/*": ["./*"]
-		},
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "Node",
-		"skipLibCheck": true,
-		"esModuleInterop": true,
-		"useDefineForClassFields": true,
-		"forceConsistentCasingInFileNames": true,
-		"allowSyntheticDefaultImports": true,
-		"lib": ["DOM", "DOM.Iterable", "ESNext"],
-		"isolatedModules": true,
-		"jsx": "react-jsx",
-		"typeRoots": ["src/types", "node_modules/@types"]
-	},
-	"include": ["src", "vite.config.ts"]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["components/*"],
+            "redux/*": ["redux/*"],
+            "utils/*": ["utils/*"],
+            "icons/*": ["shared/icons/*"],
+            "styles/*": ["shared/styles/*"]
+        },
+        "outDir": "dist",
+        "strict": true,
+        "noEmit": true,
+        "allowJs": true,
+        "incremental": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "useDefineForClassFields": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "typeRoots": ["src/types", "node_modules/@types"]
+    },
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+    "exclude": ["node_modules"]
 }

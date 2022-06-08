@@ -1,71 +1,77 @@
 {
-	"name": "foxes-knowledge",
-	"version": "1.0.0",
-	"private": true,
-	"license": "ISC",
-	"author": "Paul Litovka",
-	"description": "Website for a Foxes/Knowledge service.",
-	"scripts": {
-		"prepare": "husky install",
-		"start:development": "vite dev",
-		"start:production": "vite preview",
-		"build": "pnpm typecheck && pnpm lint && vite build",
-		"typecheck": "tsc --noEmit -p tsconfig.json",
-		"format": "prettier --loglevel warn --write src",
-		"lint": "eslint src --quiet --fix --ext js,ts,tsx"
-	},
-	"dependencies": {
-		"react": "^18.1.0",
-		"react-dom": "^18.1.0"
-	},
-	"devDependencies": {
-		"@types/node": "^17.0.36",
-		"@types/react": "^18.0.9",
-		"@types/react-dom": "^18.0.5",
-		"@typescript-eslint/eslint-plugin": "^5.26.0",
-		"@typescript-eslint/parser": "^5.26.0",
-		"@vitejs/plugin-react": "^1.3.2",
-		"eslint": "^8.16.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-react": "^7.30.0",
-		"eslint-plugin-react-hooks": "^4.5.0",
-		"husky": "^8.0.1",
-		"prettier": "^2.6.2",
-		"sass": "^1.52.1",
-		"typescript": "^4.7.2",
-		"vite": "^2.9.9"
-	},
-	"lint-staged": {
-		"src/**/*.{js,ts,tsx}": [
-			"prettier --loglevel warn --write",
-			"eslint --quiet --fix"
-		],
-		"src/**/*.{css,scss}": [
-			"prettier --loglevel warn --write"
-		]
-	},
-	"engines": {
-		"node": ">=16.0.0"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://gitlab.nixdev.co/foxes-knowledge/foxes-knowledge.git"
-	},
-	"bugs": {
-		"url": "https://gitlab.nixdev.co/foxes-knowledge/foxes-knowledge/issues"
-	},
-	"homepage": "https://gitlab.nixdev.co/foxes-knowledge/foxes-knowledge#readme",
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	}
+    "name": "foxes-knowledge",
+    "version": "1.0.0",
+    "private": true,
+    "license": "ISC",
+    "author": "Paul Litovka",
+    "description": "Website for a Foxes/Knowledge service.",
+    "scripts": {
+        "prepare": "husky install",
+        "dev": "next dev",
+        "build": "next build",
+        "export": "next export",
+        "start": "next start",
+        "lint": "next lint",
+        "typecheck": "tsc --noEmit -p tsconfig.json",
+        "format": "prettier --loglevel warn --write ."
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "^1.8.2",
+        "cookies-next": "^2.0.4",
+        "next": "^12.1.6",
+        "nprogress": "^0.2.0",
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
+        "react-redux": "^8.0.2"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^17.0.2",
+        "@commitlint/types": "^17.0.0",
+        "@types/node": "^17.0.38",
+        "@types/nprogress": "^0.2.0",
+        "@types/react": "^18.0.10",
+        "@types/react-dom": "^18.0.5",
+        "commitlint-config-gitmoji": "^2.2.5",
+        "eslint": "^8.16.0",
+        "eslint-config-next": "^12.1.6",
+        "eslint-config-prettier": "^8.5.0",
+        "husky": "^8.0.1",
+        "prettier": "^2.6.2",
+        "sass": "^1.52.1",
+        "typescript": "^4.7.2"
+    },
+    "engines": {
+        "node": ">=18",
+        "pnpm": ">=7"
+    },
+    "pnpm": {
+        "peerDependencyRules": {
+            "ignoreMissing": [
+                "commitlint"
+            ],
+            "allowedVersions": {
+                "react": "18"
+            }
+        }
+    },
+    "re1pository": {
+        "type": "git",
+        "url": "https://gitlab.nixdev.co/foxes-knowledge/foxes-knowledge.git"
+    },
+    "bugs": {
+        "url": "https://gitlab.nixdev.co/foxes-knowledge/foxes-knowledge/issues"
+    },
+    "homepage": "https://gitlab.nixdev.co/foxes-knowledge/foxes-knowledge#readme",
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }
