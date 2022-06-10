@@ -2,7 +2,7 @@
 
 const { join } = require('path')
 
-module.exports = (phase, { defaultConfig }) => {
+module.exports = (_phase, { defaultConfig }) => {
     /**
      * @type {import('next').NextConfig}
      */
@@ -11,7 +11,10 @@ module.exports = (phase, { defaultConfig }) => {
         compress: true,
         sassOptions: {
             includePaths: [join(__dirname, './styles')],
-            prependData: '@import "variables";@import "animations";@import "medias";',
+            prependData:
+                '@import "styles/variables"; \
+            @import "styles/animations"; \
+            @import "styles/medias";',
         },
         experimental: {
             outputStandalone: true,

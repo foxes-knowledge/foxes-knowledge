@@ -1,25 +1,70 @@
-import { setCookies } from 'cookies-next'
+import { LogoMain } from '#/icons/Brand'
+import { withSessionSsr } from '#/lib/session'
+import { InputSubmit } from '@/Inputs/InputSubmit'
+import { LabeledInput } from '@/Inputs/LabeledInput'
+import { PageLayout } from '@/Layouts/PageLayout'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
+import style from 'styles/pages/auth.module.scss'
 
 const SignIn: NextPage = () => {
-    const [username, setUsername] = useState<string>()
+    const router = useRouter()
+    const [credentials, setCredentials] = useState({
+        email: '',
+        password: '',
+    })
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) =>
+        setCredentials({ ...credentials, [target.name]: target.value })
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        setCookies('user', { username })
+        await fetch('/api/signin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(credentials),
+        })
+        router.push('/')
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={username}
-                onChange={({ target }) => setUsername(target.value)}
-            />
-            <input type="submit" value="Log in" />
-        </form>
+        <PageLayout title="Sign in" className={style.authPage}>
+            <div className={style.authBlock}>
+                <div className={style.logoBlock}>
+                    <LogoMain />
+                    <h1 className={style.logoHeading}>
+                        Welcome to the <strong>Knowledge</strong>!
+                    </h1>
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <LabeledInput value={credentials.email} name="email" onChange={handleChange} />
+                    <LabeledInput
+                        type="password"
+                        value={credentials.password}
+                        name="password"
+                        onChange={handleChange}
+                    />
+                    <InputSubmit label="Continue" />
+                </form>
+            </div>
+        </PageLayout>
     )
 }
+
+export const getServerSideProps = withSessionSsr(({ req }) => {
+    if (!!req.session.user) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/',
+            },
+        }
+    }
+
+    return {
+        props: {},
+    }
+})
 
 export default SignIn

@@ -1,4 +1,4 @@
-import { capitalizeFirstChar } from 'utils/capitalizeFirstChar'
+import { capitalizeFirstChar } from '#/lib/capitalizeFirstChar'
 import style from './labeledInput.module.scss'
 
 interface Props {
@@ -8,6 +8,7 @@ interface Props {
     value: string | number
     onChange: React.ChangeEventHandler<HTMLInputElement>
     required?: boolean
+    disabled?: boolean
     min?: string | number
     max?: string | number
     step?: string | number
@@ -22,6 +23,7 @@ export const LabeledInput: React.FC<Props> = props => (
             value={props.value}
             onChange={props.onChange}
             required={props.required}
+            disabled={props.disabled}
             min={props.min}
             max={props.max}
             step={props.step}
@@ -33,4 +35,5 @@ LabeledInput.defaultProps = {
     label: undefined,
     type: 'text',
     required: false,
+    disabled: false,
 }

@@ -17,7 +17,7 @@
 
         @include transition;
         &:focus {
-            border-color: $brand-blue;
+            border-color: $brand-orange;
         }
     }
 }

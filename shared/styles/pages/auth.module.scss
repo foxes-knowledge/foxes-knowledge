@@ -1,0 +1,29 @@
+.authPage {
+    @include page-base;
+    height: 100vh;
+
+    .authBlock {
+        width: 600px;
+        height: fit-content;
+        border: $border-thin-darker;
+        border-radius: $radius-auto;
+        background: white;
+        padding: $su-8;
+        margin: auto auto;
+
+        .logoBlock {
+            @include grid-center;
+            .logoHeading {
+                margin-top: $su-4;
+                font-family: 'Exo';
+                font-size: $fs-2xl;
+                strong {
+                    color: $brand-orange;
+                }
+            }
+            svg {
+                height: $su-10;
+            }
+        }
+    }
+}

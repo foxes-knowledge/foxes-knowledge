@@ -1,4 +1,4 @@
-import { capitalizeFirstChar } from 'utils/capitalizeFirstChar'
+import { capitalizeFirstChar } from '#/lib/capitalizeFirstChar'
 import style from './labeledSelect.module.scss'
 
 interface Props {

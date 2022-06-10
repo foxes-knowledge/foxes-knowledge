@@ -1,49 +1,58 @@
-import { getCookie } from 'cookies-next'
-import type { GetServerSideProps, NextPage } from 'next'
-import { useState } from 'react'
-import { decrement, increment, incrementByAmount, selectCount } from 'redux/counter/counterSlice'
-import { useAppDispatch, useAppSelector } from 'redux/hooks'
+import { withSessionSsr } from '#/lib/session'
+import { PageLayout } from '@/Layouts/PageLayout'
+import type { NextPage } from 'next'
+import type { Post } from 'types/Post'
+import type { Session } from 'types/Session'
 
-const Home: NextPage<{ user: { username: string } }> = ({ user }) => {
-    const dispatch = useAppDispatch()
-    const count = useAppSelector(selectCount)
-    const [incrementAmount, setIncrementAmount] = useState<number>(0)
+type Props = {
+    session: Session
+    posts: Post[]
+}
 
+const Home: NextPage<Props> = ({ session, posts }) => {
     return (
-        <>
-            <h1 style={{ fontFamily: 'Exo' }}>Logged as {user.username} </h1>
-            <h2 style={{ fontFamily: 'Exo2' }}>The current number is {count}</h2>
-            <div>
-                <input
-                    value={incrementAmount}
-                    onChange={e => setIncrementAmount(Number(e.target.value))}
-                    type="number"
-                />
-                <button onClick={() => dispatch(incrementByAmount(Number(incrementAmount)))}>
-                    Increment by amount
-                </button>
-            </div>
-            <div>
-                <button onClick={() => dispatch(decrement())}>Decrement by 1</button>
-                <button onClick={() => dispatch(increment())}>Increment by 1</button>
-            </div>
-        </>
+        <PageLayout title="Home" session={session} className={'s'}>
+            <h1>Logged as {session.user?.email} </h1>
+            {posts.map(post => (
+                <h3 key={post.id}>{post.title}</h3>
+            ))}
+            <button
+                onClick={async () => {
+                    await fetch('/api/signout', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                    })
+                }}
+            >
+                Logout
+            </button>
+        </PageLayout>
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
-    const user = getCookie('user', context)
-    if (!user)
+export const getServerSideProps = withSessionSsr(async ({ req }) => {
+    if (!req.session.token) {
         return {
             redirect: {
                 permanent: false,
                 destination: '/guest',
             },
         }
+    }
+
+    const postsRaw = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+        headers: {
+            Authorization: `${req.session.token.type} ${req.session.token.value}`,
+        },
+    })
+    const posts = (await postsRaw.json()) as Post[]
 
     return {
-        props: { user: JSON.parse(user as string) },
+        props: {
+            session: req.session,
+            posts,
+        },
     }
-}
+})
 
 export default Home
