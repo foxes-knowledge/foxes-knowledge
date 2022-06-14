@@ -1,11 +1,10 @@
 FROM node:18-alpine as base
 
 WORKDIR /app
-ENV NODE_ENV production
 
 RUN apk -U add --no-cache libc6-compat
 RUN corepack enable \
-    && corepack prepare pnpm@7.1.9 --activate
+    && corepack prepare pnpm@7.2.1 --activate
 
 FROM base as deps
 
