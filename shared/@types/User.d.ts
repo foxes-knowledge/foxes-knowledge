@@ -5,5 +5,5 @@ export type User = {
     isEmailPublic: boolean
     picture?: string
     bio?: string
-    color?: string
+    color: string
 }
