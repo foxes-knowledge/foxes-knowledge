@@ -18,4 +18,9 @@
     &:active {
         background: lighten($brand-orange, 4%);
     }
+
+    @include phone {
+        height: $su-77;
+        font-size: $fs-xs;
+    }
 }

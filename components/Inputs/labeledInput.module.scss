@@ -20,4 +20,12 @@
             border: 1px solid $brand-orange;
         }
     }
+
+    @include phone {
+        font-size: $fs-xs;
+        margin: $su-3 0;
+        input {
+            height: $su-77;
+        }
+    }
 }
