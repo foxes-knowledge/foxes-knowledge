@@ -1,12 +1,10 @@
 FROM node:18-alpine as base
 
-# https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine
+WORKDIR /app
+
 RUN apk -U add --no-cache libc6-compat
 RUN corepack enable \
-    && corepack prepare pnpm@7.1.7 --activate
-
-ENV NEXT_TELEMETRY_DISABLED 1
-WORKDIR /app
+    && corepack prepare pnpm@7.2.1 --activate
 
 FROM base as deps
 
@@ -20,7 +18,7 @@ COPY . .
 
 RUN pnpm build
 
-FROM node:18-alpine AS production
+FROM node:18.3-alpine3.16 AS production
 
 WORKDIR /app
 

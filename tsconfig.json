@@ -3,12 +3,11 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["components/*"],
+            "styles/*": ["shared/styles/*"],
+            "types/*": ["shared/@types/*"],
             "redux/*": ["redux/*"],
-            "utils/*": ["utils/*"],
-            "icons/*": ["shared/icons/*"],
-            "styles/*": ["shared/styles/*"]
+            "#/*": ["shared/*"]
         },
-        "outDir": "dist",
         "strict": true,
         "noEmit": true,
         "allowJs": true,

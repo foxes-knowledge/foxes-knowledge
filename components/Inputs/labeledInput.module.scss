@@ -1,17 +1,15 @@
 .labeledInput {
     @include flex-column;
     width: 100%;
-    font-size: medium;
-    margin-top: 6px;
-    margin-bottom: 10px;
+    font-size: $fs-base;
+    margin: $su-5 0;
     input {
-        height: 40px;
+        height: $su-77;
         font-size: inherit;
-        background: $white-1;
-        border-radius: 6px;
+        border-radius: $radius-default;
         border: 1px solid $dark-8;
         padding: 0 8px;
-        margin-top: 4px;
+        margin-top: $su-2;
 
         @include transition;
         &:hover {
@@ -19,7 +17,15 @@
         }
 
         &:focus {
-            border: 1px solid $brand-blue;
+            border: 1px solid $brand-orange;
+        }
+    }
+
+    @include phone {
+        font-size: $fs-xs;
+        margin: $su-3 0;
+        input {
+            height: $su-77;
         }
     }
 }
