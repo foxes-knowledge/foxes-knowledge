@@ -8,11 +8,7 @@
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
 
     .headerContainer {
-        @include flex-row;
-        justify-content: flex-start;
-        align-items: center;
-        width: 70%;
-        height: inherit;
+        @include container-base(row);
 
         .headerLogo {
             @include unselectable;

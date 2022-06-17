@@ -12,6 +12,7 @@ $white-1: #f0f0f0;
 $white-2: #f5f5f5;
 $border-gray: #d9d9d9;
 $brand-orange: #ff791a;
+$brand-orange-active: rgba($brand-orange, 0.25);
 $brand-blue: #6772eb;
 $brand-pink: #eb459e;
 $brand-yellow: #fee75c;
@@ -101,4 +102,19 @@ $radius-large-auto: Max(0px, Min($radius-large, calc((100vw - 4px - 100%) * 9999
     @include flex-column;
     width: 100%;
     height: fit-content;
+    align-items: center;
+}
+
+@mixin container-base($direction: column) {
+    display: flex;
+    flex-direction: $direction;
+    width: 80%;
+    height: inherit;
+    @if $direction == row {
+        justify-content: flex-start;
+        align-items: center;
+    } @else {
+        justify-content: center;
+        align-items: flex-start;
+    }
 }

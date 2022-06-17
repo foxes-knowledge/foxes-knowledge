@@ -1,3 +1,9 @@
 .homePage {
     @include page-base;
+
+    .pageContainer {
+        @include container-base(row);
+        margin-top: 24px;
+        align-items: flex-start;
+    }
 }

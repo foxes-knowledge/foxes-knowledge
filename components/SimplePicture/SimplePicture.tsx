@@ -1,4 +1,4 @@
-import invert from '#/lib/invertColor'
+import invertColor from '#/lib/color'
 import classes from './simplePicture.module.scss'
 
 type Props = {
@@ -11,7 +11,11 @@ export const SimplePicture: React.FC<Props> = ({ username, color, style }) => (
     <picture
         style={{
             background: color,
-            color: invert(color, { black: '#3a3a3a', white: '#fafafa', threshold: 0.28439059 }),
+            color: invertColor(color, {
+                black: '#3a3a3a',
+                white: '#fafafa',
+                threshold: 0.28439059,
+            }),
             ...style,
         }}
         className={classes.simplePicture}

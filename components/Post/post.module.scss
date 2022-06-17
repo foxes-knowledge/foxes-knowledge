@@ -1,0 +1,97 @@
+.postList {
+    @include flex-column;
+    height: calc(100vh - 54px);
+    overflow: scroll;
+
+    fieldset {
+        width: 100%;
+        margin-bottom: 10px;
+        button {
+            width: fit-content;
+            height: 42px;
+            padding: $su-3 $su-4;
+            font-size: $fs-l;
+            font-family: 'Exo';
+            line-height: $fs-xl;
+            border-radius: $radius-auto;
+
+            &:hover {
+                background: white;
+                color: $brand-orange;
+            }
+
+            &[x-active='true'] {
+                font-weight: 700;
+                letter-spacing: 0.4px;
+            }
+        }
+    }
+
+    main {
+        @include flex-column;
+        width: 100%;
+        height: fit-content;
+
+        .postItem {
+            width: 100%;
+            min-height: 160px;
+            background: white;
+            border: $border-thin-darker;
+            border-radius: $radius-auto;
+            margin-bottom: $su-2;
+            padding: $su-5;
+
+            .authorBlock {
+                display: inline-block;
+                cursor: pointer;
+                border-radius: $radius-default;
+                padding: $su-1;
+
+                div {
+                    @include flex-column;
+                }
+
+                &:hover {
+                    background: $white-2;
+                }
+            }
+
+            h1 {
+                font-size: $fs-2xl;
+                margin-top: $su-2;
+                a {
+                    color: $accent-header;
+                    &:hover {
+                        color: $brand-orange;
+                    }
+                }
+            }
+
+            .tags {
+                @include flex-row;
+                flex-wrap: wrap;
+                width: 100%;
+
+                button {
+                    font-size: $fs-xs;
+                    padding: $su-2;
+                    border: 1px solid transparent;
+                    border-radius: $radius-auto;
+                    @include transition;
+                }
+            }
+
+            .trackers {
+                @include flex-row;
+                padding: $su-1 0;
+                span {
+                    margin-right: 16px;
+                    &:last-of-type {
+                        margin-left: auto;
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -25,7 +25,7 @@ export const PageLayout: React.FC<Props> = ({ title, className, session, childre
                 <title>{title}</title>
             </Head>
             {mode === 'cont' && <Header user={session?.user!} />}
-            <main className={className}>{children}</main>
+            <div className={className}>{children}</div>
         </>
     )
 }

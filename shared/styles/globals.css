@@ -25,7 +25,8 @@ button {
 button,
 input,
 select,
-textarea {
+textarea,
+fieldset {
     outline: none;
     border: none;
     color: #252525;
