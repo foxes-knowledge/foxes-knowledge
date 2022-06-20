@@ -1,11 +1,16 @@
 .postList {
     @include flex-column;
+    max-width: 100%;
     height: calc(100vh - 54px);
     overflow: scroll;
 
     fieldset {
         width: 100%;
         margin-bottom: 10px;
+        @include phone {
+            margin-bottom: 6px;
+        }
+
         button {
             width: fit-content;
             height: 42px;
@@ -14,6 +19,11 @@
             font-family: 'Exo';
             line-height: $fs-xl;
             border-radius: $radius-auto;
+
+            @include phone {
+                font-size: $fs-base;
+                line-height: $fs-l;
+            }
 
             &:hover {
                 background: white;
@@ -39,16 +49,57 @@
             border: $border-thin-darker;
             border-radius: $radius-auto;
             margin-bottom: $su-2;
-            padding: $su-5;
+            padding: $su-4 $su-5;
+
+            @include phone {
+                margin-bottom: $su-1;
+                padding: $su-2;
+            }
 
             .authorBlock {
-                display: inline-block;
+                @include flex-row;
+                width: fit-content;
+                align-items: center;
                 cursor: pointer;
                 border-radius: $radius-default;
                 padding: $su-1;
 
+                .imageContainer {
+                    display: flex;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    width: 32px;
+                    height: 32px;
+                    margin-right: $su-2;
+
+                    @include phone {
+                        width: 24px;
+                        height: 24px;
+                    }
+
+                    picture {
+                        @include grid-center;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+
                 div {
                     @include flex-column;
+
+                    strong {
+                        font-size: $fs-base;
+                        font-weight: 600;
+                        @include phone {
+                            font-size: $fs-s;
+                        }
+                    }
+                    span {
+                        font-size: $fs-s;
+                        @include phone {
+                            font-size: $fs-xs;
+                        }
+                    }
                 }
 
                 &:hover {
@@ -59,6 +110,9 @@
             h1 {
                 font-size: $fs-2xl;
                 margin-top: $su-2;
+                @include phone {
+                    font-size: $fs-l;
+                }
                 a {
                     color: $accent-header;
                     &:hover {
@@ -71,6 +125,11 @@
                 @include flex-row;
                 flex-wrap: wrap;
                 width: 100%;
+                margin: $su-1 0;
+
+                @include phone {
+                    margin: $su-05 0;
+                }
 
                 button {
                     font-size: $fs-xs;
@@ -78,17 +137,55 @@
                     border: 1px solid transparent;
                     border-radius: $radius-auto;
                     @include transition;
+                    @include phone {
+                        font-size: $fs-xxs;
+                    }
                 }
             }
 
             .trackers {
                 @include flex-row;
+                justify-content: center;
+                align-items: center;
                 padding: $su-1 0;
+                button {
+                    @include flex-row;
+                    align-items: center;
+                    line-height: $fs-l;
+                    padding: $su-2;
+                    border-radius: $radius-large-auto;
+                    font-size: $fs-s;
+
+                    @include phone {
+                        font-size: $fs-xxs;
+                    }
+
+                    svg {
+                        margin-right: $su-25;
+                        fill: $dark-2;
+                    }
+
+                    &:hover {
+                        background: $white-1;
+                    }
+                }
+
                 span {
-                    margin-right: 16px;
-                    &:last-of-type {
-                        margin-left: auto;
-                        margin-right: 0;
+                    @include flex-row;
+                    align-items: center;
+                    line-height: $fs-l;
+                    padding: $su-2;
+                    border-radius: $radius-large-auto;
+                    font-size: $fs-s;
+                    margin-left: auto;
+                    margin-right: 0;
+                    @include phone {
+                        font-size: $fs-xs;
+                    }
+
+                    svg {
+                        margin-right: $su-1;
+                        fill: $dark-2;
                     }
                 }
             }

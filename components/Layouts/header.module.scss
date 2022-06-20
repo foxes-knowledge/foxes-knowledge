@@ -10,11 +10,15 @@
     .headerContainer {
         @include container-base(row);
 
+        @include phone {
+            width: 95%;
+        }
+
         .headerLogo {
             @include unselectable;
             @include flex-row;
             align-items: center;
-            margin-right: 32px;
+            margin-right: $su-4;
             cursor: pointer;
 
             figcaption {
@@ -24,6 +28,14 @@
                 font-family: 'Exo';
                 font-size: $fs-xl;
                 font-weight: 700;
+            }
+
+            @include phone {
+                width: 95%;
+                margin: 0;
+                figcaption {
+                    display: none;
+                }
             }
         }
 
@@ -49,6 +61,17 @@
                 height: 100%;
                 background: $dark-7;
             }
+
+            @include phone {
+                min-width: 160px;
+                input {
+                    width: calc(100% - 40px);
+                    font-size: $fs-s;
+                }
+                button {
+                    width: 40px;
+                }
+            }
         }
 
         .userBlock {
@@ -72,8 +95,22 @@
             }
 
             .headerUser {
+                @include unselectable;
                 margin-left: 20px;
                 cursor: pointer;
+            }
+
+            @include phone {
+                height: 40px;
+                margin-left: 20px;
+                .createBtn {
+                    min-width: 60px;
+                    font-size: $fs-xxs;
+                    padding: 0;
+                }
+                .headerUser {
+                    margin-left: 6px;
+                }
             }
         }
     }

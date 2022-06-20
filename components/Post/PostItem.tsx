@@ -1,5 +1,10 @@
-import color from '#/lib/color'
+import dayjs from 'dayjs'
 import Link from 'next/link'
+
+import { BookOpen, Comment, Heart } from '#/icons/Misc'
+import color from '#/lib/color'
+import { SimpleImage } from '@/SimpleImage/SimpleImage'
+import Image from 'next/image'
 import { Post } from 'types/Post'
 import { Tag } from 'types/Tag'
 import style from './post.module.scss'
@@ -22,10 +27,17 @@ export const PostItem: React.FC<Props> = ({ post }) => {
     return (
         <article className={style.postItem}>
             <div className={style.authorBlock}>
-                {/* <Image src={post.user.picture!} alt="user_picture" /> */}
+                <picture className={style.imageContainer}>
+                    {post.user.picture ? (
+                        <Image src={post.user.picture!} alt="user_picture" width={32} height={32} />
+                    ) : (
+                        <SimpleImage username={post.user.username} color={post.user.color} />
+                    )}
+                </picture>
+
                 <div>
                     <strong>{post.user.name}</strong>
-                    <span>date</span>
+                    <span>{dayjs(post.created_at).format('D MMM')}</span>
                 </div>
             </div>
             <h1>
@@ -38,14 +50,23 @@ export const PostItem: React.FC<Props> = ({ post }) => {
                         onMouseOver={({ currentTarget }) => handleHover(currentTarget, tag)}
                         onMouseOut={handleOutHover}
                     >
+                        <small style={{ color: tag.color, fontWeight: 700, marginRight: 2 }}>
+                            #
+                        </small>
                         {tag.name}
                     </button>
                 ))}
             </div>
             <div className={style.trackers}>
-                <span>☻ reactions</span>
-                <span>☻ comments</span>
-                <span>☻ read</span>
+                <button>
+                    <Heart width={20} /> N reactions
+                </button>
+                <button>
+                    <Comment width={20} /> N comments
+                </button>
+                <span>
+                    <BookOpen width={20} /> N mins
+                </span>
             </div>
         </article>
     )

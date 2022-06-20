@@ -1,0 +1,36 @@
+.topTagsList {
+    @include flex-column;
+    width: 320px;
+    height: fit-content;
+    border-radius: $radius-auto;
+    border: $border-thin;
+    overflow: hidden;
+    margin-left: 10px;
+    background: white;
+
+    .header {
+        @include flex-row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding: $su-3;
+
+        h2 {
+            font-size: $fs-xl;
+        }
+
+        a {
+            font-size: $fs-s;
+        }
+    }
+    .content {
+        @include flex-column;
+
+        a {
+            @include flex-row;
+            justify-content: space-between;
+            width: 100%;
+            padding: $su-4 $su-3;
+        }
+    }
+}

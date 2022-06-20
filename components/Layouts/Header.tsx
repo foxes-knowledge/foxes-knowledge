@@ -1,5 +1,5 @@
 import { LogoMain } from '#/icons/Brand'
-import { SimplePicture } from '@/SimplePicture/SimplePicture'
+import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import Image from 'next/image'
 import Link from 'next/link'
 import { User } from 'types/User'
@@ -27,7 +27,7 @@ export const Header: React.FC<{ user: User }> = ({ user }) => {
                         {user.picture ? (
                             <Image src={user.picture} alt="profile_picture" />
                         ) : (
-                            <SimplePicture
+                            <SimpleImage
                                 username={user.username}
                                 color={user.color}
                                 style={{ padding: 10 }}

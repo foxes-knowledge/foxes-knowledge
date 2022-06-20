@@ -1,5 +1,5 @@
 import invertColor from '#/lib/color'
-import classes from './simplePicture.module.scss'
+import classes from './simpleImage.module.scss'
 
 type Props = {
     username: string
@@ -7,10 +7,12 @@ type Props = {
     style?: React.CSSProperties
 }
 
-export const SimplePicture: React.FC<Props> = ({ username, color, style }) => (
+export const SimpleImage: React.FC<Props> = ({ username, color, style }) => (
     <picture
         style={{
+            userSelect: 'none',
             background: color,
+            borderRadius: '30px',
             color: invertColor(color, {
                 black: '#3a3a3a',
                 white: '#fafafa',
@@ -18,7 +20,7 @@ export const SimplePicture: React.FC<Props> = ({ username, color, style }) => (
             }),
             ...style,
         }}
-        className={classes.simplePicture}
+        className={classes.simpleImage}
     >
         <span>{username.substring(0, 2).toUpperCase()}</span>
     </picture>

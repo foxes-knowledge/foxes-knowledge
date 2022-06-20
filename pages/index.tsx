@@ -1,5 +1,6 @@
 import { withSessionSsr } from '#/lib/session'
 import { PageLayout } from '@/Layouts/PageLayout'
+import { TopTagsList } from '@/Listings/TopTagsList'
 import { NavigationBar } from '@/Navigation/NavigationBar'
 import { PostList } from '@/Post/PostList'
 import type { NextPage } from 'next'
@@ -18,6 +19,7 @@ const Home: NextPage<Props> = ({ session, posts }) => {
             <div className={style.pageContainer}>
                 <NavigationBar />
                 <PostList posts={posts} />
+                <TopTagsList />
             </div>
             {/* <button
                 onClick={async () => {
