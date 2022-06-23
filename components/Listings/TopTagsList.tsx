@@ -13,7 +13,7 @@ export const TopTagsList: React.FC = () => (
             <Link href={'/tags/React'}>
                 <a>
                     <span>#React</span>
-                    <span>222</span>
+                    <span>20</span>
                 </a>
             </Link>
             <Link href={'/tags/PHP'}>

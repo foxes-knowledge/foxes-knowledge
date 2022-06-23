@@ -1,3 +1,12 @@
+/**
+ *  Parse number of minutes into hours and/or minutes
+ *  @param {number} minutes The number of minutes to parse
+ *  @returns {string} The parsed minutes
+ *  @example
+ *  parseMinutes(5) // '5 minutes'
+ *  parseMinutes(65) // '1 hour(s) and 5 minutes'
+ *  parseMinutes(120) // '2 hour(s)'
+ */
 export const parseMinutes = (min: number): string => {
     const hrs = min / 60
     const rhrs = Math.floor(hrs)

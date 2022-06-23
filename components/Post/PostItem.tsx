@@ -3,6 +3,7 @@ import Link from 'next/link'
 
 import { BookOpen, Comment, Heart } from '#/icons/Misc'
 import color from '#/lib/color'
+import { getTextReadingTime } from '#/lib/readingTime'
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import Image from 'next/image'
 import { Post } from 'types/Post'
@@ -65,7 +66,7 @@ export const PostItem: React.FC<Props> = ({ post }) => {
                     <Comment width={20} /> N comments
                 </button>
                 <span>
-                    <BookOpen width={20} /> N mins
+                    <BookOpen width={20} /> {getTextReadingTime(post.content)} mins
                 </span>
             </div>
         </article>

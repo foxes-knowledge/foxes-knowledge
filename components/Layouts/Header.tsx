@@ -1,4 +1,5 @@
 import { LogoMain } from '#/icons/Brand'
+import { Search } from '#/icons/Misc'
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -17,7 +18,9 @@ export const Header: React.FC<{ user: User }> = ({ user }) => {
                 </Link>
                 <div className={style.searchbar}>
                     <input type="text" />
-                    <button type="submit" value="s" />
+                    <button type="submit">
+                        <Search width={24} />
+                    </button>
                 </div>
                 <div className={style.userBlock}>
                     <div className={style.createBtn}>
