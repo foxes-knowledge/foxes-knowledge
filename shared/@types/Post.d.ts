@@ -8,7 +8,9 @@ export interface Post extends Entity {
     title: string
     content: string
     tags: Tag[]
-    reactions: Reaction
+    reactions: Reaction[] | number
+    comments: Comment[] | number
+    attachments: Attachment[] | number
     parent?: Post
     child?: Post
 }

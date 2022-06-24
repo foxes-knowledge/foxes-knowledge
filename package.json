@@ -12,8 +12,10 @@
         "export": "next export",
         "start": "next start",
         "lint": "next lint",
-        "typecheck": "tsc --noEmit -p tsconfig.json",
-        "format": "prettier --loglevel warn --write ."
+        "typecheck": "tsc",
+        "format": "prettier --loglevel warn --write .",
+        "cypress": "cypress open",
+        "cypress:headless": "cypress run"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.8.2",
@@ -36,6 +38,7 @@
         "@types/react": "^18.0.14",
         "@types/react-dom": "^18.0.5",
         "commitlint-config-gitmoji": "^2.2.5",
+        "cypress": "^10.2.0",
         "eslint": "^8.18.0",
         "eslint-config-next": "^12.1.6",
         "eslint-config-prettier": "^8.5.0",

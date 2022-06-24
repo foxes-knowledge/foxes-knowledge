@@ -20,6 +20,7 @@ export const LabeledSelect: React.FC<Props> = props => (
             onChange={props.onChange}
             required={props.required}
             multiple={props.multiple}
+            data-cy={props.name}
         >
             {!props.multiple && (
                 <option disabled value="">

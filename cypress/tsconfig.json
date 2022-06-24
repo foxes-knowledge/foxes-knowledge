@@ -1,0 +1,10 @@
+{
+    "extends": "../tsconfig.json",
+    "include": ["./component/**/*", "./e2e/**/*", "./support/**/*"],
+    "exclude": ["./plugins/**/*"],
+    "compilerOptions": {
+        "rootDir": "./",
+        "isolatedModules": false,
+        "types": ["cypress"]
+    }
+}

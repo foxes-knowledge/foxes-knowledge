@@ -1,8 +1,4 @@
-import { Token } from './Session'
-import { User } from './User'
-
-type ResponseData = {
+export type ResponseData = {
     message: string
-    user?: User
-    token?: Token
+    [x: string]: any
 }
