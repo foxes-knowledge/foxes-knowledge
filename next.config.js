@@ -19,6 +19,9 @@ module.exports = (_phase, { defaultConfig }) => {
         experimental: {
             outputStandalone: true,
         },
+        images: {
+            domains: ['via.placeholder.com'],
+        },
     }
 
     return nextConfig

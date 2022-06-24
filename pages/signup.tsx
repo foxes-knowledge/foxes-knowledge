@@ -32,7 +32,7 @@ const SignUp: NextPage = () => {
     }
 
     return (
-        <PageLayout title="Sign up" className={style.authPage}>
+        <PageLayout title="Sign up" className={style.authPage} mode="inf">
             <div className={style.authBlock}>
                 <div className={style.logoBlock}>
                     <LogoMain />

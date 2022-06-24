@@ -3,15 +3,17 @@ import { useEffect } from 'react'
 import { useAppDispatch } from 'redux/hooks'
 import { setSession } from 'redux/session/sessionSlice'
 import { Session } from 'types/Session'
+import { Header } from './Header'
 
 type Props = {
-    title: string
+    title?: string
     className: string
     session?: Session
     children: React.ReactNode
+    mode?: 'cont' | 'inf'
 }
 
-export const PageLayout: React.FC<Props> = ({ title, className, session, children }) => {
+export const PageLayout: React.FC<Props> = ({ title, className, session, children, mode }) => {
     const dispatch = useAppDispatch()
     useEffect(() => {
         session && dispatch(setSession(session))
@@ -22,7 +24,13 @@ export const PageLayout: React.FC<Props> = ({ title, className, session, childre
             <Head>
                 <title>{title}</title>
             </Head>
-            <main className={className}>{children}</main>
+            {mode === 'cont' && <Header user={session?.user!} />}
+            <div className={className}>{children}</div>
         </>
     )
+}
+
+PageLayout.defaultProps = {
+    title: 'Foxes Knowledge',
+    mode: 'cont',
 }

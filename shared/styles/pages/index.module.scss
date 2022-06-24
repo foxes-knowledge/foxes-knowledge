@@ -1,0 +1,16 @@
+.homePage {
+    @include page-base;
+
+    .pageContainer {
+        @include container-base(row);
+        align-items: flex-start;
+        justify-content: space-between;
+        padding-top: 24px;
+
+        @include phone {
+            padding-top: 6px;
+            flex-direction: column;
+            width: 95%;
+        }
+    }
+}
