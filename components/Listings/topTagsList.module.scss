@@ -8,6 +8,11 @@
     margin-left: 10px;
     background: white;
 
+    @include phone {
+        width: 100%;
+        margin-left: 0;
+    }
+
     .header {
         @include flex-row;
         width: 100%;
