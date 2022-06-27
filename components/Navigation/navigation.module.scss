@@ -27,6 +27,7 @@
             border-radius: $radius-auto;
             cursor: pointer;
             font-size: $fs-base;
+            color: $dark-2;
 
             @include phone {
                 flex: 0 0 auto;

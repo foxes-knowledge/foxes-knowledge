@@ -3,10 +3,12 @@ import { defineConfig } from 'cypress'
 export default defineConfig({
     projectId: 'yyt6mi',
     defaultCommandTimeout: 6000,
+    fixturesFolder: false,
+    screenshotsFolder: false,
 
     e2e: {
         baseUrl: 'http://localhost:3000',
-        setupNodeEvents(on, config) {},
+        experimentalSessionAndOrigin: true,
     },
 
     component: {
@@ -14,5 +16,9 @@ export default defineConfig({
             framework: 'next',
             bundler: 'webpack',
         },
+    },
+
+    env: {
+        API_URL: 'http://localhost:8000/api',
     },
 })

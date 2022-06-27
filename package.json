@@ -30,7 +30,7 @@
         "reading-time": "^1.5.0"
     },
     "devDependencies": {
-        "@commitlint/cli": "^17.0.2",
+        "@commitlint/cli": "^17.0.3",
         "@commitlint/types": "^17.0.0",
         "@types/node": "^18.0.0",
         "@types/node-emoji": "^1.8.1",

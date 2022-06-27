@@ -20,6 +20,7 @@ context('Authentication', () => {
 
         it('Submit data successfully', () => {
             cy.session('user', () => {
+                cy.visit('/signin')
                 cy.get('[data-cy="email"]').type('pashalitovka@gmail.com')
                 cy.get('[data-cy="password"]').type('123456789')
                 cy.get('form').submit()
