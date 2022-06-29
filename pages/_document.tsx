@@ -5,7 +5,6 @@ class MyDocument extends Document {
         return (
             <Html lang="en">
                 <Head>
-                    <meta charSet="UTF-8" />
                     <meta httpEquiv="content-type" content="text/html" />
                     <meta name="description" content="Knowledge database of the Foxes team." />
                     <meta

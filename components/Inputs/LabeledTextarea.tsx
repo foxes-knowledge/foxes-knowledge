@@ -12,7 +12,12 @@ interface Props {
 export const LabeledTextarea: React.FC<Props> = props => (
     <label className={style.labeledTextarea}>
         {props.label || capitalizeFirstChar(props.name)}
-        <textarea name={props.name} value={props.value} onChange={props.onChange}></textarea>
+        <textarea
+            name={props.name}
+            value={props.value}
+            onChange={props.onChange}
+            data-cy={props.name}
+        ></textarea>
     </label>
 )
 

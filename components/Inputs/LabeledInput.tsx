@@ -27,6 +27,7 @@ export const LabeledInput: React.FC<Props> = props => (
             min={props.min}
             max={props.max}
             step={props.step}
+            data-cy={props.name}
         />
     </label>
 )

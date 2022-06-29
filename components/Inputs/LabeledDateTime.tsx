@@ -22,6 +22,7 @@ export const LabeledDateTime: React.FC<Props> = props => (
             name={props.name}
             onChange={props.onChange}
             required={props.required}
+            data-cy={props.name}
         />
     </label>
 )

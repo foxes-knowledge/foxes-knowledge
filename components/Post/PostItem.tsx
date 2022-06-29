@@ -27,44 +27,57 @@ export const PostItem: React.FC<Props> = ({ post }) => {
 
     return (
         <article className={style.postItem}>
-            <div className={style.authorBlock}>
-                <picture className={style.imageContainer}>
-                    {post.user.picture ? (
-                        <Image src={post.user.picture!} alt="user_picture" width={32} height={32} />
-                    ) : (
-                        <SimpleImage username={post.user.username} color={post.user.color} />
-                    )}
-                </picture>
+            <Link href={`/u/${post.user.username}`}>
+                <div className={style.authorBlock}>
+                    <picture className={style.imageContainer}>
+                        {post.user.picture ? (
+                            <Image
+                                src={post.user.picture!}
+                                alt="user_picture"
+                                width={32}
+                                height={32}
+                            />
+                        ) : (
+                            <SimpleImage username={post.user.username} color={post.user.color} />
+                        )}
+                    </picture>
 
-                <div>
-                    <strong>{post.user.name}</strong>
-                    <span>{dayjs(post.created_at).format('D MMM')}</span>
+                    <div>
+                        <strong>{post.user.name}</strong>
+                        <span>{dayjs(post.created_at).format('D MMM')}</span>
+                    </div>
                 </div>
-            </div>
+            </Link>
             <h1>
-                <Link href={`/${post.user.username.toLowerCase()}/${post.id}`}>{post.title}</Link>
+                <Link href={`/u/${post.user.username}/${post.id}`}>{post.title}</Link>
             </h1>
             <div className={style.tags}>
                 {post.tags.map(tag => (
-                    <button
-                        key={tag.id}
-                        onMouseOver={({ currentTarget }) => handleHover(currentTarget, tag)}
-                        onMouseOut={handleOutHover}
-                    >
-                        <small style={{ color: tag.color, fontWeight: 700, marginRight: 2 }}>
-                            #
-                        </small>
-                        {tag.name}
-                    </button>
+                    <Link key={tag.id} href={`/tags/${tag.id}`}>
+                        <button
+                            onMouseOver={({ currentTarget }) => handleHover(currentTarget, tag)}
+                            onMouseOut={handleOutHover}
+                        >
+                            <small style={{ color: tag.color, fontWeight: 700, marginRight: 2 }}>
+                                #
+                            </small>
+                            {tag.name}
+                        </button>
+                    </Link>
                 ))}
             </div>
             <div className={style.trackers}>
-                <button>
-                    <Heart width={20} /> N reactions
-                </button>
-                <button>
-                    <Comment width={20} /> N comments
-                </button>
+                <Link href={`/u/${post.user.username}/${post.id}`}>
+                    <button>
+                        <Heart width={20} /> {post.reactions as number} reactions
+                    </button>
+                </Link>
+
+                <Link href={`/u/${post.user.username}/${post.id}`}>
+                    <button>
+                        <Comment width={20} /> {post.comments as number} comments
+                    </button>
+                </Link>
                 <span>
                     <BookOpen width={20} /> {getTextReadingTime(post.content)} mins
                 </span>

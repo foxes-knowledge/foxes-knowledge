@@ -8,6 +8,7 @@ logs
 
 # Next.js
 /.next/
+/.swc/
 /out/
 /build/
 /dist/

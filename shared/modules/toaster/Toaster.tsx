@@ -39,14 +39,16 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setIcon(<Loading className={style.spinAnimation} />)
         setRendered(true)
         promise
-            .then(res => res.json())
-            .then((data: ResponseData) => {
+            .then(async (res: Response) => {
+                if (!res.ok) throw await res.json()
+                const data = await res.json()
                 setIcon(<Success />)
                 setTitle(data.message ? data.message : 'Success')
                 setTimeout(clear, 5000)
                 onSuccess && onSuccess(data)
             })
             .catch((err: ResponseData) => {
+                console.dir(err)
                 const responseMsg = err.message
                 const msg = Array.isArray(responseMsg)
                     ? () => {
@@ -123,7 +125,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             {mounted &&
                 createPortal(
                     rendered && (
-                        <div className={style.toastContainer}>
+                        <div className={style.toastContainer} data-cy="toaster">
                             <div className={style.toast} ref={ref}>
                                 {icon}
                                 <span>{title}</span>

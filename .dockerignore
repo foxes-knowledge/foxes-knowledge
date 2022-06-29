@@ -9,4 +9,5 @@ README.md
 .commitlint*
 .husky
 .next
+.swc
 .git*

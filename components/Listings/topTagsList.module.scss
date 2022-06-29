@@ -1,7 +1,6 @@
 .topTagsList {
     @include flex-column;
     width: 320px;
-    height: fit-content;
     border-radius: $radius-auto;
     border: $border-thin;
     overflow: hidden;
