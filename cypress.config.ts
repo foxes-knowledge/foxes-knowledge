@@ -2,9 +2,10 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
     projectId: 'yyt6mi',
-    defaultCommandTimeout: 6000,
+    defaultCommandTimeout: 8000,
     fixturesFolder: false,
     screenshotsFolder: false,
+    video: false,
 
     e2e: {
         baseUrl: 'http://localhost:3000',

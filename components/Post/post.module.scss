@@ -136,7 +136,7 @@
                     padding: $su-2;
                     border: 1px solid transparent;
                     border-radius: $radius-auto;
-                    @include transition;
+
                     @include phone {
                         font-size: $fs-xxs;
                     }

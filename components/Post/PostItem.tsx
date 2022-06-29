@@ -69,13 +69,13 @@ export const PostItem: React.FC<Props> = ({ post }) => {
             <div className={style.trackers}>
                 <Link href={`/u/${post.user.username}/${post.id}`}>
                     <button>
-                        <Heart width={20} /> N reactions
+                        <Heart width={20} /> {post.reactions as number} reactions
                     </button>
                 </Link>
 
                 <Link href={`/u/${post.user.username}/${post.id}`}>
                     <button>
-                        <Comment width={20} /> N comments
+                        <Comment width={20} /> {post.comments as number} comments
                     </button>
                 </Link>
                 <span>

@@ -62,11 +62,11 @@ $radius-large: $su-25;
 $radius-large-auto: Max(0px, Min($radius-large, calc((100vw - 4px - 100%) * 9999))) / $radius-large;
 
 @mixin unselectable {
-    user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+    user-select: none;
 }
 
 @mixin flex-column {

@@ -10,24 +10,20 @@ type Props = {
     to: string
 }
 
-const ListElement: React.FC<Props> = ({ emojiKey, label, to }) => (
-    <li className={style.navItem} data-cy={to}>
-        {emoji.get(emojiKey)} <span>{label}</span>
-    </li>
-)
-
 export const NavigationItem: React.FC<Props> = ({ emojiKey, label, to }) => {
     const router = useRouter()
 
     return (
         <>
             {router.pathname === to ? (
-                <ListElement emojiKey={emojiKey} label={label} to={to} />
+                <li className={style.navItem} data-cy={to}>
+                    {emoji.get(emojiKey)} <span>{label}</span>
+                </li>
             ) : (
                 <Link href={to} passHref>
-                    <a>
-                        <ListElement emojiKey={emojiKey} label={label} to={to} />
-                    </a>
+                    <li className={style.navItem} data-cy={to}>
+                        {emoji.get(emojiKey)} <span>{label}</span>
+                    </li>
                 </Link>
             )}
         </>

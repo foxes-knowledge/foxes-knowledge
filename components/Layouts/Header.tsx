@@ -17,8 +17,8 @@ export const Header: React.FC<{ user: User }> = ({ user }) => {
                     </figure>
                 </Link>
                 <div className={style.searchbar}>
-                    <input type="text" />
-                    <button type="submit">
+                    <input type="text" title="Enter your query" placeholder="" />
+                    <button type="submit" title="Search">
                         <Search width={24} />
                     </button>
                 </div>
