@@ -2,6 +2,8 @@ import './commands'
 
 import { mount } from 'cypress/react'
 
+Cypress.Commands.add('mount', mount)
+
 declare global {
     namespace Cypress {
         interface Chainable {
@@ -9,8 +11,3 @@ declare global {
         }
     }
 }
-
-Cypress.Commands.add('mount', mount)
-
-// Example use:
-// cy.mount(<MyComponent />)
