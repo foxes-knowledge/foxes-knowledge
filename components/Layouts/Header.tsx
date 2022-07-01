@@ -23,9 +23,9 @@ export const Header: React.FC<{ user: User }> = ({ user }) => {
                     </button>
                 </div>
                 <div className={style.userBlock}>
-                    <div className={style.createBtn}>
-                        <span>Create post</span>
-                    </div>
+                    <Link href={'/new'}>
+                        <a className={style.createBtn}>Create post</a>
+                    </Link>
                     <div className={style.headerUser}>
                         {user.picture ? (
                             <Image src={user.picture} alt="profile_picture" />

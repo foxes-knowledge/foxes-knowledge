@@ -1,0 +1,48 @@
+.container {
+    @include flex-column;
+    min-width: 500px;
+    width: 100%;
+    max-width: 900px;
+
+    .modes {
+        @include flex-row;
+        justify-content: flex-end;
+        margin-bottom: $su-2;
+    }
+
+    .editor {
+        @include flex-column;
+
+        section {
+            @include flex-column;
+            width: 100%;
+            min-height: 600px;
+            background: white;
+            border: $border-thin-darker;
+            border-radius: $radius-auto;
+            padding: $su-7 $su-9;
+
+            .title {
+                @include flex-row;
+                width: 100%;
+                margin-bottom: $su-2;
+                font-weight: 800;
+                font-size: $fs-5xl;
+                font-family: 'Boring Sans A';
+                resize: vertical;
+            }
+
+            .tags {
+            }
+            .controls {
+            }
+            .content {
+            }
+        }
+
+        .options {
+            @include flex-row;
+            width: 100%;
+        }
+    }
+}

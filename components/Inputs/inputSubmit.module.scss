@@ -1,6 +1,5 @@
 .inputSumbit {
     width: 100%;
-    height: $su-8;
     background: $brand-orange;
     color: white;
     margin: 10px 0;
@@ -10,8 +9,9 @@
     font-size: $fs-base;
     font-weight: 600;
     cursor: pointer;
-
+    padding: $su-3;
     @include transition;
+
     &:hover {
         background: darken($brand-orange, 6%);
     }

@@ -1,0 +1,16 @@
+.newPostPage {
+    @include page-base;
+
+    .pageContainer {
+        @include container-base(row);
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 24px;
+
+        @include phone {
+            padding-top: 6px;
+            flex-direction: column;
+            width: 95%;
+        }
+    }
+}
