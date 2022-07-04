@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
+
 import { useAppDispatch } from 'redux/hooks'
 import { setSession } from 'redux/slices/sessionSlice'
-import { Session } from 'types/Session'
+import type { Session } from 'types/Session'
 import { Header } from './Header'
 
 type Props = {

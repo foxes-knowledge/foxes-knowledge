@@ -1,4 +1,4 @@
-import { LogoMain } from '#/icons/Brand'
+import { Logo } from '#/icons/Brand'
 import { withSessionSsr } from '#/lib/session'
 import { InputSubmit } from '@/Inputs/InputSubmit'
 import { LabeledInput } from '@/Inputs/LabeledInput'
@@ -35,7 +35,7 @@ const SignUp: NextPage = () => {
         <PageLayout title="Sign up" className={style.authPage} mode="inf">
             <div className={style.authBlock}>
                 <div className={style.logoBlock}>
-                    <LogoMain />
+                    <Logo />
                     <h1 className={style.logoHeading}>
                         Welcome to the <strong>Knowledge</strong>!
                     </h1>

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from 'redux/store'
-import { Session, Token } from 'types/Session'
-import { User } from 'types/User'
+import type { Session, Token } from 'types/Session'
+import type { User } from 'types/User'
 
 export const sessionSlice = createSlice({
     name: 'session',

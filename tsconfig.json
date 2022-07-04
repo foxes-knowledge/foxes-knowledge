@@ -4,7 +4,7 @@
         "paths": {
             "@/*": ["components/*"],
             "styles/*": ["shared/styles/*"],
-            "types/*": ["shared/@types/*"],
+            "types/*": ["shared/typings/*"],
             "redux/*": ["redux/*"],
             "#/*": ["shared/*"]
         },

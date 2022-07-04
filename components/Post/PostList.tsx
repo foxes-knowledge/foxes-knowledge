@@ -1,9 +1,11 @@
-import { SelectableBtn } from '@/Buttons/SelectableBtn'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { Post } from 'types/Post'
-import style from './post.module.scss'
+
+import { SelectableBtn } from '@/Buttons/SelectableBtn'
+import type { Post } from 'types/Post'
 import { PostItem } from './PostItem'
+
+import style from './post.module.scss'
 
 type Props = {
     posts: Post[]

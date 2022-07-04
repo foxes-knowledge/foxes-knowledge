@@ -19,7 +19,7 @@
             @include grid-center;
             .logoHeading {
                 margin-top: $su-4;
-                font-family: 'Exo';
+                font-family: $ff-proxima;
                 font-size: $fs-2xl;
                 strong {
                     color: $brand-orange;

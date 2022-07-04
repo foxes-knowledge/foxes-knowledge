@@ -6,8 +6,10 @@ import color from '#/lib/color'
 import { getTextReadingTime } from '#/lib/readingTime'
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import Image from 'next/image'
-import { Post } from 'types/Post'
-import { Tag } from 'types/Tag'
+
+import type { Post } from 'types/Post'
+import type { Tag } from 'types/Tag'
+
 import style from './post.module.scss'
 
 type Props = {

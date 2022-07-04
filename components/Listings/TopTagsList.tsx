@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Tag } from 'types/Tag'
+import type { Tag } from 'types/Tag'
+
 import style from './topTagsList.module.scss'
 
 const TagObject: React.FC<{ id: number; name: string; posts: number }> = ({ id, name, posts }) => (

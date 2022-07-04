@@ -1,7 +1,7 @@
-import { Loading, Success, Warning } from '#/icons/Misc'
+import { Loading, Success, Warning } from '#/icons/Toast'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ResponseData } from 'types/Fetch'
+import type { ResponseData } from 'types/Fetch'
 import style from './toaster.module.scss'
 
 const ProviderContext = createContext<Toast>(null!)
@@ -15,8 +15,8 @@ interface ToastPromise {
 }
 
 interface Toast {
-    loading: (title?: string) => void
-    success: (title?: string) => void
+    loading: (message?: string) => void
+    success: (message?: string) => void
     error: (message?: string) => void
     promise: (params: ToastPromise) => void
     clear: () => void
@@ -40,20 +40,38 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setRendered(true)
         promise
             .then(async (res: Response) => {
-                if (!res.ok) throw await res.json()
-                const data = await res.json()
-                setIcon(<Success />)
-                setTitle(data.message ? data.message : 'Success')
-                setTimeout(clear, 5000)
-                onSuccess && onSuccess(data)
+                const json = (await res.json()) as ResponseData
+                if (!res.ok) throw json
+                success(json.message)
+                onSuccess && onSuccess(json)
             })
             .catch((err: ResponseData) => {
-                console.dir(err)
-                const responseMsg = err.message
-                const msg = Array.isArray(responseMsg)
+                error(err.name === 'SyntaxError' ? 'Server offline' : err.message)
+                onError && onError(err)
+            })
+    }
+
+    const loading = (message?: string) => {
+        message ? setTitle(message) : setTitle('Processing...')
+        setIcon(<Loading className={style.spinAnimation} />)
+        setRendered(true)
+    }
+
+    const success = (message?: string) => {
+        message ? setTitle(message) : setTitle('Success')
+        setIcon(<Success />)
+        setRendered(true)
+        setTimeout(clear, 5000)
+    }
+
+    const error = (message?: string) => {
+        if (!message) setTitle('Something went wrong')
+        else
+            setTitle(
+                Array.isArray(message)
                     ? () => {
                           let mergedMsg = ''
-                          responseMsg.forEach((object: any) => {
+                          message.forEach((object: any) => {
                               for (const key in object) {
                                   const value = object[key]
                                   mergedMsg = `${mergedMsg}\n${key}:${value}`
@@ -61,43 +79,8 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
                           })
                           return mergedMsg.trim()
                       }
-                    : responseMsg
-                setIcon(<Warning />)
-                setTitle(msg)
-                setTimeout(clear, 5000)
-                onError && onError(err)
-            })
-    }
-
-    const loading = (title?: string) => {
-        title ? setTitle(title) : setTitle('Processing...')
-        setIcon(<Loading className={style.spinAnimation} />)
-        setRendered(true)
-    }
-
-    const success = (title?: string) => {
-        title ? setTitle(title) : setTitle('Success')
-        setIcon(<Success />)
-        setRendered(true)
-        setTimeout(clear, 5000)
-    }
-
-    const error = (message?: string) => {
-        if (message) {
-            const msg = Array.isArray(message)
-                ? () => {
-                      let mergedMsg = ''
-                      message.forEach((object: any) => {
-                          for (const key in object) {
-                              const value = object[key]
-                              mergedMsg = `${mergedMsg}\n${key}:${value}`
-                          }
-                      })
-                      return mergedMsg.trim()
-                  }
-                : message
-            setTitle(msg)
-        } else setTitle('Something went wrong.')
+                    : message
+            )
         setIcon(<Warning />)
         setRendered(true)
         setTimeout(clear, 5000)

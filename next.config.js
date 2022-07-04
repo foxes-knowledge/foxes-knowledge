@@ -1,7 +1,5 @@
 // @ts-check
 
-const { join } = require('path')
-
 module.exports = () => {
     /**
      * @type {import('next').NextConfig}
@@ -11,9 +9,10 @@ module.exports = () => {
         compress: true,
         output: 'standalone',
         sassOptions: {
-            includePaths: [join(__dirname, './styles')],
+            includePaths: [require('path').join(__dirname, './shared/styles')],
             prependData:
                 '@import "styles/variables"; \
+            @import "styles/mixins"; \
             @import "styles/animations"; \
             @import "styles/medias";',
         },

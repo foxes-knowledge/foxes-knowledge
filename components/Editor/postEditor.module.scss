@@ -10,33 +10,45 @@
         margin-bottom: $su-2;
     }
 
-    .editor {
+    .form {
         @include flex-column;
 
-        section {
+        .editor {
             @include flex-column;
             width: 100%;
             min-height: 600px;
             background: white;
             border: $border-thin-darker;
             border-radius: $radius-auto;
-            padding: $su-7 $su-9;
 
             .title {
-                @include flex-row;
-                width: 100%;
-                margin-bottom: $su-2;
+                max-width: 100%;
                 font-weight: 800;
                 font-size: $fs-5xl;
-                font-family: 'Boring Sans A';
-                resize: vertical;
+                font-family: $ff-content;
+                line-height: $lh-tight;
+                resize: none;
+                border-radius: $radius-auto;
+                margin: $su-7 $su-9;
             }
 
             .tags {
+                margin: 0 $su-9;
             }
             .controls {
+                @include flex-row;
+                width: 100%;
+                padding: $su-2 $su-9;
+                background: $white-2;
             }
             .content {
+                display: block;
+                max-width: 100%;
+                min-height: 54px;
+                margin: $su-5 $su-9;
+                font-family: $ff-code;
+                font-size: $fs-l;
+                resize: none;
             }
         }
 

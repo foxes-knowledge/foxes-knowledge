@@ -1,4 +1,4 @@
-import { LogoMain } from '#/icons/Brand'
+import { Logo } from '#/icons/Brand'
 import { PageLayout } from '@/Layouts/PageLayout'
 import type { NextPage } from 'next'
 import Link from 'next/link'
@@ -7,7 +7,7 @@ import style from 'styles/pages/guest.module.scss'
 const Guest: NextPage = () => (
     <PageLayout title="Foxes Knowledge" className={style.guestPage} mode="inf">
         <div className={style.logoBlock}>
-            <LogoMain width={256} />
+            <Logo width={256} />
             <h1>Foxes / Knowledge</h1>
         </div>
         <Link href="/signin">

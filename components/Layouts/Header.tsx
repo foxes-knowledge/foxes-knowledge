@@ -1,9 +1,11 @@
-import { LogoMain } from '#/icons/Brand'
-import { Search } from '#/icons/Misc'
-import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import Image from 'next/image'
 import Link from 'next/link'
-import { User } from 'types/User'
+
+import { Logo } from '#/icons/Brand'
+import { Search } from '#/icons/Misc'
+import { SimpleImage } from '@/SimpleImage/SimpleImage'
+import type { User } from 'types/User'
+
 import style from './header.module.scss'
 
 export const Header: React.FC<{ user: User }> = ({ user }) => {
@@ -12,7 +14,7 @@ export const Header: React.FC<{ user: User }> = ({ user }) => {
             <div className={style.headerContainer}>
                 <Link href="/">
                     <figure className={style.headerLogo}>
-                        <LogoMain height={46} />
+                        <Logo height={46} />
                         <figcaption>Knowledge</figcaption>
                     </figure>
                 </Link>
