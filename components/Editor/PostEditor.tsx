@@ -6,6 +6,7 @@ import { SelectableBtn } from '@/Buttons/SelectableBtn'
 import { InputSubmit } from '@/Inputs/InputSubmit'
 import type { Post } from 'types/Post'
 
+import { Settings } from '#/icons/Misc'
 import * as Typography from '#/icons/Typography'
 import style from './postEditor.module.scss'
 
@@ -99,6 +100,7 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
                     <ReactTextareaAutosize
                         cacheMeasurements
                         value={content}
+                        minRows={1}
                         onChange={e => setContent(e.target.value)}
                         placeholder="Post content ..."
                         className={style.content}
@@ -108,8 +110,10 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
                     />
                 </section>
                 <fieldset className={style.options}>
-                    <InputSubmit style={{ width: 'fit-content' }} />
-                    <button>settings</button>
+                    <InputSubmit style={{ width: 'fit-content' }} label="Publish" />
+                    <button type="button">
+                        <Settings />
+                    </button>
                 </fieldset>
             </form>
         </div>

@@ -1,6 +1,6 @@
 .inputSumbit {
     width: 100%;
-    background: $brand-orange;
+    background: $brand-blue;
     color: white;
     margin: 10px 0;
     border-radius: $radius-auto;
@@ -9,14 +9,14 @@
     font-size: $fs-base;
     font-weight: 600;
     cursor: pointer;
-    padding: $su-3;
+    padding: $su-3 $su-5;
     @include transition;
 
     &:hover {
-        background: darken($brand-orange, 6%);
+        background: darken($brand-blue, 7%);
     }
     &:active {
-        background: lighten($brand-orange, 4%);
+        background: lighten($brand-blue, 4%);
     }
 
     @include phone {

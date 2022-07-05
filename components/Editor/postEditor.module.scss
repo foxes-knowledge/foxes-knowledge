@@ -34,6 +34,10 @@
 
             .tags {
                 margin: 0 $su-9;
+                padding: $su-2;
+                border-radius: $radius-auto;
+                border: $border-thin;
+                margin-bottom: $su-3;
             }
             .controls {
                 @include flex-row;
@@ -54,7 +58,16 @@
 
         .options {
             @include flex-row;
+            align-items: center;
             width: 100%;
+
+            button {
+                width: 28px;
+                height: 28px;
+                svg {
+                    fill: $dark-3;
+                }
+            }
         }
     }
 }
