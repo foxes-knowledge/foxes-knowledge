@@ -1,6 +1,6 @@
 .header {
     width: 100%;
-    height: 56px;
+    height: $header-height;
     display: flex;
     justify-content: center;
     position: relative;
@@ -25,7 +25,7 @@
                 height: 100%;
                 text-align: center;
                 margin-left: 8px;
-                font-family: 'Exo';
+                font-family: $ff-proxima;
                 font-size: $fs-xl;
                 font-weight: 700;
             }
@@ -92,7 +92,6 @@
                 @include unselectable;
                 @include grid-center;
                 cursor: pointer;
-                min-width: 110px;
                 height: inherit;
                 border: 1px solid $brand-blue;
                 border-radius: $radius-large-auto;
@@ -100,6 +99,11 @@
                 color: $brand-blue;
                 font-weight: 600;
                 font-size: $fs-base;
+
+                &:hover {
+                    color: white;
+                    background: $brand-blue;
+                }
             }
 
             .headerUser {

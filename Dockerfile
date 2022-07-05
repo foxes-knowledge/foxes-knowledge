@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apk -U add --no-cache libc6-compat
 RUN corepack enable \
-    && corepack prepare pnpm@7.4.0 --activate
+    && corepack prepare pnpm@7.5.0 --activate
 
 FROM base as deps
 

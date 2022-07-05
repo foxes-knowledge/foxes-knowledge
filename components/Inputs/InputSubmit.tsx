@@ -2,10 +2,11 @@ import style from './inputSubmit.module.scss'
 
 interface Props {
     label?: string
+    style?: React.CSSProperties
 }
 
-export const InputSubmit: React.FC<Props> = ({ label }) => (
-    <input className={style.inputSumbit} type="submit" value={label} />
+export const InputSubmit: React.FC<Props> = props => (
+    <input className={style.inputSumbit} type="submit" value={props.label} style={props.style} />
 )
 
 InputSubmit.defaultProps = {

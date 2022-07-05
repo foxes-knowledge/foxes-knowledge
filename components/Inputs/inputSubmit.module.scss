@@ -1,22 +1,22 @@
 .inputSumbit {
     width: 100%;
-    height: $su-8;
-    background: $brand-orange;
+    background: $brand-blue;
     color: white;
     margin: 10px 0;
     border-radius: $radius-auto;
-    font-family: 'Exo';
+    font-family: $ff-proxima;
     letter-spacing: 0.8px;
     font-size: $fs-base;
     font-weight: 600;
     cursor: pointer;
-
+    padding: $su-3 $su-5;
     @include transition;
+
     &:hover {
-        background: darken($brand-orange, 6%);
+        background: darken($brand-blue, 7%);
     }
     &:active {
-        background: lighten($brand-orange, 4%);
+        background: lighten($brand-blue, 4%);
     }
 
     @include phone {

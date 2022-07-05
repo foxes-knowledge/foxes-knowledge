@@ -1,10 +1,12 @@
-import { ToastProvider } from '#/modules/toaster/Toaster'
-import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Router from 'next/router'
 import nprogress from 'nprogress'
+
+import { ToastProvider } from '#/modules/toaster/Toaster'
+import type { AppProps } from 'next/app'
 import { Provider } from 'react-redux'
 import { store } from 'redux/store'
+
 import 'styles/globals.css'
 import 'styles/nprogress.css'
 

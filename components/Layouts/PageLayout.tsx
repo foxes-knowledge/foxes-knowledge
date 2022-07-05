@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
+
 import { useAppDispatch } from 'redux/hooks'
-import { setSession } from 'redux/session/sessionSlice'
-import { Session } from 'types/Session'
+import { setSession } from 'redux/slices/sessionSlice'
+import type { Session } from 'types/Session'
 import { Header } from './Header'
 
 type Props = {
@@ -16,13 +17,13 @@ type Props = {
 export const PageLayout: React.FC<Props> = ({ title, className, session, children, mode }) => {
     const dispatch = useAppDispatch()
     useEffect(() => {
-        session && dispatch(setSession(session))
+        session && dispatch(setSession(session!))
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <>
             <Head>
-                <title>{title}</title>
+                <title>{title! + (mode === 'cont' && ' ∣ Foxes Knowledge')}</title>
             </Head>
             {mode === 'cont' && <Header user={session?.user!} />}
             <div className={className}>{children}</div>

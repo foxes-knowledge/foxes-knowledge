@@ -1,25 +1,31 @@
 import { withSessionSsr } from '#/lib/session'
 import { PageLayout } from '@/Layouts/PageLayout'
-import { TopTagsList } from '@/Listings/TopTagsList'
 import { NavigationBar } from '@/Navigation/NavigationBar'
-import { PostList } from '@/Post/PostList'
+
 import type { NextPage } from 'next'
-import style from 'styles/pages/index.module.scss'
+import type { Paginated } from 'types/Entity'
 import type { Post } from 'types/Post'
 import type { Session } from 'types/Session'
+import type { Tag } from 'types/Tag'
+
+import { queryBuilder } from '#/lib/queryBuilder'
+import { TopTagsList } from '@/Listings/TopTagsList'
+import { PostList } from '@/Post/PostList'
+import style from 'styles/pages/index.module.scss'
 
 type Props = {
     session: Session
-    posts: Post[]
+    posts: Paginated<Post>
+    tags: Tag[]
 }
 
-const Home: NextPage<Props> = ({ session, posts }) => {
+const Home: NextPage<Props> = ({ session, posts, tags }) => {
     return (
         <PageLayout title="Home" session={session} className={style.homePage}>
             <div className={style.pageContainer}>
                 <NavigationBar />
-                <PostList posts={posts} />
-                <TopTagsList />
+                <PostList posts={posts.data} />
+                <TopTagsList tags={tags} />
             </div>
             {/* <button
                 onClick={async () => {
@@ -37,7 +43,7 @@ const Home: NextPage<Props> = ({ session, posts }) => {
     )
 }
 
-export const getServerSideProps = withSessionSsr(async ({ req }) => {
+export const getServerSideProps = withSessionSsr(async ({ req, query }) => {
     if (!req.session.token) {
         return {
             redirect: {
@@ -47,17 +53,26 @@ export const getServerSideProps = withSessionSsr(async ({ req }) => {
         }
     }
 
-    const postsRaw = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+    const fetchOptions = {
         headers: {
             Authorization: `${req.session.token.type} ${req.session.token.value}`,
         },
-    })
-    const posts = (await postsRaw.json()) as Post[]
+    }
+
+    const [posts, tags] = await Promise.all([
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts${queryBuilder(query)}`, fetchOptions).then(
+            data => data.json() as unknown as Paginated<Post>
+        ),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags/top`, fetchOptions).then(
+            data => data.json() as unknown as Tag[]
+        ),
+    ])
 
     return {
         props: {
             session: req.session,
             posts,
+            tags,
         },
     }
 })

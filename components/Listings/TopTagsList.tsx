@@ -1,27 +1,29 @@
 import Link from 'next/link'
+import type { Tag } from 'types/Tag'
+
 import style from './topTagsList.module.scss'
 
-export const TopTagsList: React.FC = () => (
+const TagObject: React.FC<{ id: number; name: string; posts: number }> = ({ id, name, posts }) => (
+    <Link href={`/tags/${id}`}>
+        <a>
+            <span>#{name}</span>
+            <span>{posts}</span>
+        </a>
+    </Link>
+)
+
+export const TopTagsList: React.FC<{ tags: Tag[] }> = ({ tags }) => (
     <article className={style.topTagsList}>
         <div className={style.header}>
-            <h2>Top 10 Tags</h2>
+            <h2>Top 5 Tags</h2>
             <Link href={'/tags'}>
                 <a>See all</a>
             </Link>
         </div>
         <div className={style.content}>
-            <Link href={'/tags/React'}>
-                <a>
-                    <span>#React</span>
-                    <span>20</span>
-                </a>
-            </Link>
-            <Link href={'/tags/PHP'}>
-                <a>
-                    <span>#PHP</span>
-                    <span>220</span>
-                </a>
-            </Link>
+            {tags?.map(tag => (
+                <TagObject key={tag.id} id={tag.id} name={tag.name} posts={tag.posts as number} />
+            ))}
         </div>
     </article>
 )
