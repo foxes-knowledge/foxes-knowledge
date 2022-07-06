@@ -10,7 +10,7 @@
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, monospace;
+    font-family: 'SF Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
 
 button {
@@ -54,7 +54,7 @@ img {
 
 a {
     text-decoration: none;
-    color: #ff791a;
+    color: #515ddd;
 }
 
 html,
@@ -69,7 +69,7 @@ body {
     width: 0;
 }
 ::selection {
-    background: #ff791a;
+    background: #515ddd;
     color: rgb(250, 249, 250);
 }
 

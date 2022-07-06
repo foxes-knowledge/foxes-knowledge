@@ -24,10 +24,10 @@
             figcaption {
                 height: 100%;
                 text-align: center;
-                margin-left: 8px;
+                margin-left: $su-2;
                 font-family: $ff-proxima;
                 font-size: $fs-xl;
-                font-weight: 700;
+                font-weight: 800;
             }
 
             @include phone {

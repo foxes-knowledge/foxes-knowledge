@@ -56,6 +56,37 @@
             }
         }
 
+        .preview {
+            @include flex-column;
+            @include reader;
+            width: 100%;
+            min-height: 600px;
+            background: white;
+            border: $border-thin-darker;
+            border-radius: $radius-auto;
+            padding: $su-4 $su-9;
+
+            .title {
+                max-width: 100%;
+                font-weight: 800;
+                font-size: $fs-5xl;
+                font-family: $ff-content;
+                line-height: $lh-tight;
+            }
+
+            .tags {
+                margin: $su-5 0;
+            }
+
+            .content {
+                display: block;
+                max-width: 100%;
+                margin-top: $su-3;
+                font-family: $ff-content;
+                font-size: $fs-xl;
+            }
+        }
+
         .options {
             @include flex-row;
             align-items: center;

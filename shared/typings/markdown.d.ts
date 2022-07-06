@@ -1,0 +1,11 @@
+export type MarkdownType =
+    | 'bold'
+    | 'italic'
+    | 'link'
+    | 'file'
+    | 'code'
+    | 'codeblock'
+    | 'heading'
+    | 'quote'
+    | 'ordered-list'
+    | 'unordered-list'
