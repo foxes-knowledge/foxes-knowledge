@@ -51,7 +51,7 @@ export const PostItem: React.FC<Props> = ({ post }) => {
                 </div>
             </Link>
             <h1>
-                <Link href={`/u/${post.user.username}/${post.id}`}>{post.title}</Link>
+                <Link href={`/p/${post.id}`}>{post.title}</Link>
             </h1>
             <div className={style.tags}>
                 {post.tags.map(tag => (
