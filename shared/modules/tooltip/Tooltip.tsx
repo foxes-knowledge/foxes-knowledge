@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import style from './tooltip.module.scss'
 
 type Props = {
@@ -11,6 +11,7 @@ type Props = {
 export const Tooltip: React.FC<Props> = ({ children, content, delay, position }) => {
     let timeout: NodeJS.Timeout
     const [active, setActive] = useState(false)
+    const ref = useRef<HTMLDivElement>(null)
 
     const showTip = () => {
         timeout = setTimeout(() => {
@@ -20,14 +21,30 @@ export const Tooltip: React.FC<Props> = ({ children, content, delay, position })
 
     const hideTip = () => {
         clearInterval(timeout)
-        setActive(false)
+        if (!ref.current) return
+
+        const transform = {
+            top: 'translateX(-50%) translateY(15%)',
+            right: 'translateX(-15%) translateY(-50%)',
+            bottom: 'translateX(-50%) translateY(-15%)',
+            left: 'translateX(15%) translateY(-50%)',
+        }[position!]
+
+        ref.current.animate(
+            [{ opacity: 1 }, { opacity: 0.5 }, { opacity: 0, transform: transform }],
+            {
+                delay: delay! / 2,
+                duration: 100,
+                fill: 'forwards',
+            }
+        ).onfinish = () => setActive(false)
     }
 
     return (
         <div className={style.container} onMouseEnter={showTip} onMouseLeave={hideTip}>
             {children}
             {active && (
-                <div className={style.tooltip} data-position={position}>
+                <div className={style.tooltip} data-position={position} ref={ref}>
                     {content}
                 </div>
             )}

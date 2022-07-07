@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import AsyncSelect from 'react-select/async'
 import ReactTextareaAutosize from 'react-textarea-autosize'
 
 import { IconBtn } from '@/Buttons/IconBtn'
@@ -7,22 +8,28 @@ import { SelectableBtn } from '@/Buttons/SelectableBtn'
 import { InputSubmit } from '@/Inputs/InputSubmit'
 import type { MarkdownType } from 'types/markdown'
 import type { Post } from 'types/Post'
+import type { Tag } from 'types/Tag'
 
 import { Settings } from '#/icons/Misc'
 import * as Typography from '#/icons/Typography'
+
 import { markdownHandler, parseMarkdown } from '#/lib/markdown'
+import { tagStyles } from '#/lib/react-select'
 import { Tooltip } from '#/modules/tooltip/Tooltip'
+import { useAppSelector } from 'redux/hooks'
+
 import style from './postEditor.module.scss'
 
 type Mode = 'preview' | 'edit'
 type Props = {
-    post?: Post
+    readonly post?: Post
 }
 
 export const PostEditor: React.FC<Props> = ({ post }) => {
     const [mode, setMode] = useState<Mode>('edit')
     const [title, setTitle] = useState(post?.title || '')
     const [content, setContent] = useState(post?.content || '')
+    const token = useAppSelector(state => state.session.token)
     const contentRef = useRef<HTMLTextAreaElement>(null)
 
     const handleModeChange: React.MouseEventHandler<HTMLButtonElement> = ({ currentTarget }) => {
@@ -42,6 +49,21 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
             setContent(content.slice(0, pStart) + result + content.slice(pEnd))
         } else setContent(content + result)
     }
+
+    const handleTagChange = ({ selectedTag }: any) => {
+        console.log(selectedTag)
+    }
+
+    const loadTags = async (search: string) =>
+        new Promise<any[]>(async resolve => {
+            const tags = (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?search=${search}`, {
+                headers: {
+                    Authorization: `${token.type} ${token.value}`,
+                },
+            }).then(res => res.json())) as Tag[]
+
+            resolve(tags.map(tag => ({ ...tag, label: tag.name, value: tag.id })))
+        })
 
     return (
         <div className={style.container}>
@@ -68,9 +90,15 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
                             data-gramm_editor="false"
                             autoFocus
                         />
-                        <select className={style.tags}>
-                            <option>s</option>
-                        </select>
+                        <AsyncSelect
+                            isMulti
+                            cacheOptions
+                            aria-label="tags"
+                            className={style.tags}
+                            styles={tagStyles}
+                            onChange={handleTagChange}
+                            loadOptions={loadTags}
+                        />
                         <fieldset className={style.controls}>
                             <Tooltip content="Bold">
                                 <MarkdownBtn
@@ -175,9 +203,9 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
                 )}
                 <fieldset className={style.options}>
                     <InputSubmit style={{ width: 'fit-content' }} label="Publish" />
-                    <button type="button">
-                        <Settings />
-                    </button>
+                    <Tooltip content="Settings" position="right">
+                        <IconBtn name="settings" Icon={Settings} onClick={() => null} />
+                    </Tooltip>
                 </fieldset>
             </form>
         </div>

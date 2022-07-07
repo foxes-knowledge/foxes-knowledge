@@ -8,10 +8,17 @@
     &:hover {
         background: $brand-blue-active;
     }
+    &:active {
+        background: darker($brand-blue-active, 10%);
+    }
     &:first-of-type {
         margin-left: 0;
     }
     &:last-of-type {
         margin-left: auto;
+    }
+
+    &[name='settings'] {
+        padding: $su-2;
     }
 }

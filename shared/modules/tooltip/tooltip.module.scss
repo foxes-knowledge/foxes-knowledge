@@ -1,3 +1,67 @@
+@mixin pop-up-in($duration: 0.1s) {
+    animation: popUpIn $duration ease forwards;
+    @keyframes popUpIn {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-20%);
+        }
+    }
+}
+
+@mixin pop-right-in($duration: 0.1s) {
+    animation: popRightIn $duration ease forwards;
+    @keyframes popRightIn {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(20%) translateY(-50%);
+        }
+    }
+}
+
+@mixin pop-left-in($duration: 0.1s) {
+    animation: popLeftIn $duration ease forwards;
+    @keyframes popLeftIn {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-20%) translateY(-50%);
+        }
+    }
+}
+
+@mixin pop-down-in($duration: 0.1s) {
+    animation: popDownIn $duration ease forwards;
+    @keyframes popDownIn {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(20%);
+        }
+    }
+}
+
 .container {
     display: inline-block;
     position: relative;
@@ -9,7 +73,7 @@
         transform: translateX(-50%);
         padding: $su-2;
         color: white;
-        background: $dark-3;
+        background: $dark-2;
         font-size: $fs-s;
         font-family: $ff-content;
         line-height: $lh-base;
@@ -19,23 +83,27 @@
 
         &[data-position='top'] {
             top: calc($margin * -2);
+            @include pop-up-in(0.16s);
         }
 
         &[data-position='right'] {
-            left: calc(100% + $margin / 3);
+            left: calc(100% + $margin / 8);
             top: 50%;
             transform: translateX(0) translateY(-50%);
+            @include pop-right-in(0.16s);
         }
 
         &[data-position='bottom'] {
             bottom: calc($margin * -2);
+            @include pop-down-in(0.16s);
         }
 
         &[data-position='left'] {
             left: auto;
-            right: calc(100% + $margin / 3);
+            right: calc(100% + $margin / 6);
             top: 50%;
             transform: translateX(0) translateY(-50%);
+            @include pop-left-in(0.16s);
         }
     }
 }

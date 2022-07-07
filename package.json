@@ -29,6 +29,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-redux": "^8.0.2",
+        "react-select": "^5.4.0",
         "react-textarea-autosize": "^8.3.4"
     },
     "devDependencies": {
@@ -57,7 +58,8 @@
     "pnpm": {
         "peerDependencyRules": {
             "ignoreMissing": [
-                "commitlint"
+                "commitlint",
+                "@babel/core"
             ],
             "allowedVersions": {
                 "react": "18",
