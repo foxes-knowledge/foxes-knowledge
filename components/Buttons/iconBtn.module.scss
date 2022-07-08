@@ -6,10 +6,8 @@
     margin-left: $su-1;
 
     &:hover {
+        fill: $brand-blue;
         background: $brand-blue-active;
-    }
-    &:active {
-        background: darker($brand-blue-active, 10%);
     }
     &:first-of-type {
         margin-left: 0;
@@ -20,5 +18,10 @@
 
     &[name='settings'] {
         padding: $su-2;
+    }
+
+    &[data-active='true'] {
+        fill: $dark-5;
+        background: $white-0;
     }
 }

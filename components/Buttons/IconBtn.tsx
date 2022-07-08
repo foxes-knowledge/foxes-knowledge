@@ -2,18 +2,26 @@ import style from './iconBtn.module.scss'
 
 type Props = {
     name: string
+    active?: boolean
     Icon: React.ElementType
     onClick: React.MouseEventHandler<HTMLButtonElement>
+    title?: string
 }
 
-export const IconBtn: React.FC<Props> = ({ name, Icon, onClick }) => (
+export const IconBtn: React.FC<Props> = props => (
     <button
         type="button"
-        name={name}
-        aria-label={`Icon ${name}`}
+        name={props.name}
+        onClick={props.onClick}
+        aria-label={`Icon ${props.name}`}
         className={style.iconBtn}
-        onClick={onClick}
+        title={props.title}
+        data-active={props.active}
     >
-        <Icon />
+        <props.Icon />
     </button>
 )
+
+IconBtn.defaultProps = {
+    active: false,
+}

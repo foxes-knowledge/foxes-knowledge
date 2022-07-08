@@ -1,21 +1,20 @@
+import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import AsyncSelect from 'react-select/async'
 import ReactTextareaAutosize from 'react-textarea-autosize'
 
-import { IconBtn } from '@/Buttons/IconBtn'
-import { MarkdownBtn } from '@/Buttons/MarkdownBtn'
 import { SelectableBtn } from '@/Buttons/SelectableBtn'
+import { NewPostSettingsDropdown } from '@/Dropdowns/NewPostSettingsDropdown'
 import { InputSubmit } from '@/Inputs/InputSubmit'
+import { MarkdownBar } from '@/Markdown/MarkdownBar'
+
 import type { MarkdownType } from 'types/markdown'
 import type { Post } from 'types/Post'
 import type { Tag } from 'types/Tag'
 
-import { Settings } from '#/icons/Misc'
-import * as Typography from '#/icons/Typography'
-
 import { markdownHandler, parseMarkdown } from '#/lib/markdown'
 import { tagStyles } from '#/lib/react-select'
-import { Tooltip } from '#/modules/tooltip/Tooltip'
+import { useToast } from '#/modules/toaster/Toaster'
 import { useAppSelector } from 'redux/hooks'
 
 import style from './postEditor.module.scss'
@@ -28,9 +27,15 @@ type Props = {
 export const PostEditor: React.FC<Props> = ({ post }) => {
     const [mode, setMode] = useState<Mode>('edit')
     const [title, setTitle] = useState(post?.title || '')
+    const [tags, setTags] = useState(post?.tags || [])
     const [content, setContent] = useState(post?.content || '')
-    const token = useAppSelector(state => state.session.token)
+    const parentState = useState(post?.parent || null)
+
+    const router = useRouter()
+    const { promise } = useToast()
     const contentRef = useRef<HTMLTextAreaElement>(null)
+
+    const session = useAppSelector(state => state.session)
 
     const handleModeChange: React.MouseEventHandler<HTMLButtonElement> = ({ currentTarget }) => {
         setMode(currentTarget.name as Mode)
@@ -50,15 +55,33 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
         } else setContent(content + result)
     }
 
-    const handleTagChange = ({ selectedTag }: any) => {
-        console.log(selectedTag)
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = async e => {
+        e.preventDefault()
+        promise({
+            title: 'Creating...',
+            promise: fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${session.token.type} ${session.token.value}`,
+                },
+                body: JSON.stringify({
+                    user_id: session.user.id,
+                    title: title,
+                    content: content,
+                    tag_ids: tags.map(tag => tag.id),
+                    parent_id: parentState[0]?.id,
+                }),
+            }),
+            onSuccess: data => router.push(`/p/${data.id}`),
+        })
     }
 
     const loadTags = async (search: string) =>
-        new Promise<any[]>(async resolve => {
+        new Promise<Tag[]>(async resolve => {
             const tags = (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?search=${search}`, {
                 headers: {
-                    Authorization: `${token.type} ${token.value}`,
+                    Authorization: `${session.token.type} ${session.token.value}`,
                 },
             }).then(res => res.json())) as Tag[]
 
@@ -75,137 +98,70 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
                     onClick={handleModeChange}
                 />
             </fieldset>
-            <form className={style.form}>
-                {mode === 'edit' ? (
-                    <section className={style.editor}>
-                        <ReactTextareaAutosize
-                            cacheMeasurements
-                            value={title}
-                            onChange={e => setTitle(e.target.value)}
-                            placeholder="New post title ..."
-                            className={style.title}
-                            autoComplete="off"
-                            maxLength={64}
-                            aria-label="Post title"
-                            data-gramm_editor="false"
-                            autoFocus
-                        />
-                        <AsyncSelect
-                            isMulti
-                            cacheOptions
-                            aria-label="tags"
-                            className={style.tags}
-                            styles={tagStyles}
-                            onChange={handleTagChange}
-                            loadOptions={loadTags}
-                        />
-                        <fieldset className={style.controls}>
-                            <Tooltip content="Bold">
-                                <MarkdownBtn
-                                    name="bold"
-                                    Icon={Typography.Bold}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="Italic">
-                                <MarkdownBtn
-                                    name="italic"
-                                    Icon={Typography.Italic}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="URL">
-                                <MarkdownBtn
-                                    name="link"
-                                    Icon={Typography.Link}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="Ordered List">
-                                <MarkdownBtn
-                                    name="ordered-list"
-                                    Icon={Typography.OrderedList}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="Unordered List">
-                                <MarkdownBtn
-                                    name="unordered-list"
-                                    Icon={Typography.UnorderedList}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="Heading">
-                                <MarkdownBtn
-                                    name="heading"
-                                    Icon={Typography.Heading}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="Quote">
-                                <MarkdownBtn
-                                    name="quote"
-                                    Icon={Typography.Quote}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="Code">
-                                <MarkdownBtn
-                                    name="code"
-                                    Icon={Typography.Code}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="Codeblock">
-                                <MarkdownBtn
-                                    name="codeblock"
-                                    Icon={Typography.CodeBlock}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <Tooltip content="File">
-                                <MarkdownBtn
-                                    name="file"
-                                    Icon={Typography.Attach}
-                                    onClick={handleMarkdown}
-                                />
-                            </Tooltip>
-                            <IconBtn
-                                name="markdown"
-                                Icon={Typography.Markdown}
-                                onClick={handleMarkdown}
+            <form className={style.form} onSubmit={handleSubmit}>
+                <section className={style.editor}>
+                    <ReactTextareaAutosize
+                        cacheMeasurements
+                        value={title}
+                        onChange={e => setTitle(e.target.value)}
+                        placeholder="New post title ..."
+                        className={style.title}
+                        autoComplete="off"
+                        maxLength={64}
+                        disabled={mode === 'preview'}
+                        aria-label="Post title"
+                        data-gramm_editor="false"
+                        required
+                        autoFocus
+                    />
+                    <AsyncSelect
+                        isMulti
+                        cacheOptions
+                        id="tags"
+                        instanceId="tags"
+                        aria-label="tags"
+                        placeholder="Search for tags ..."
+                        className={style.tags}
+                        styles={tagStyles}
+                        value={tags}
+                        isDisabled={mode === 'preview'}
+                        isOptionDisabled={() => tags.length >= 5}
+                        onChange={tags => setTags(tags as Tag[])}
+                        loadOptions={loadTags}
+                    />
+                    {mode === 'edit' ? (
+                        <>
+                            <MarkdownBar onClick={handleMarkdown} />
+                            <ReactTextareaAutosize
+                                cacheMeasurements
+                                value={content}
+                                ref={contentRef}
+                                minRows={1}
+                                onChange={e => setContent(e.target.value)}
+                                placeholder="Post content ..."
+                                className={style.content}
+                                autoComplete="off"
+                                maxLength={65535}
+                                aria-label="Post content"
+                                required
                             />
-                        </fieldset>
-                        <ReactTextareaAutosize
-                            cacheMeasurements
-                            value={content}
-                            ref={contentRef}
-                            minRows={1}
-                            onChange={e => setContent(e.target.value)}
-                            placeholder="Post content ..."
-                            className={style.content}
-                            autoComplete="off"
-                            maxLength={65535}
-                            aria-label="Post content"
-                        />
-                    </section>
-                ) : (
-                    <section className={style.preview}>
-                        <h1 className={style.title}>{title}</h1>
-                        <div className={style.tags}>
-                            <button>s</button>
-                        </div>
+                        </>
+                    ) : (
                         <div
-                            className={style.content}
+                            className={style.preview}
                             dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }}
                         ></div>
-                    </section>
-                )}
+                    )}
+                </section>
                 <fieldset className={style.options}>
-                    <InputSubmit style={{ width: 'fit-content' }} label="Publish" />
-                    <Tooltip content="Settings" position="right">
-                        <IconBtn name="settings" Icon={Settings} onClick={() => null} />
-                    </Tooltip>
+                    <InputSubmit
+                        style={{
+                            width: 'fit-content',
+                            background: '#515ddd',
+                        }}
+                        label="Publish"
+                    />
+                    <NewPostSettingsDropdown parentState={parentState} />
                 </fieldset>
             </form>
         </div>

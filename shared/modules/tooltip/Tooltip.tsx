@@ -5,10 +5,11 @@ type Props = {
     content: string
     delay?: number
     position?: 'top' | 'right' | 'bottom' | 'left'
+    disabled?: boolean
     children: React.ReactNode
 }
 
-export const Tooltip: React.FC<Props> = ({ children, content, delay, position }) => {
+export const Tooltip: React.FC<Props> = ({ children, content, delay, position, disabled }) => {
     let timeout: NodeJS.Timeout
     const [active, setActive] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
@@ -43,7 +44,7 @@ export const Tooltip: React.FC<Props> = ({ children, content, delay, position })
     return (
         <div className={style.container} onMouseEnter={showTip} onMouseLeave={hideTip}>
             {children}
-            {active && (
+            {!disabled && active && (
                 <div className={style.tooltip} data-position={position} ref={ref}>
                     {content}
                 </div>
@@ -55,4 +56,5 @@ export const Tooltip: React.FC<Props> = ({ children, content, delay, position })
 Tooltip.defaultProps = {
     delay: 400,
     position: 'bottom',
+    disabled: false,
 }

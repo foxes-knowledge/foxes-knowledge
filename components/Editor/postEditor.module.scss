@@ -30,21 +30,17 @@
                 resize: none;
                 border-radius: $radius-auto;
                 margin: $su-7 $su-9;
+                background: transparent;
             }
 
             .tags {
                 margin: 0 $su-9;
-                padding: $su-2;
-                border-radius: $radius-auto;
-                border: $border-thin;
                 margin-bottom: $su-3;
+                padding: $su-05;
+                border: $border-thin;
+                border-radius: $radius-auto;
             }
-            .controls {
-                @include flex-row;
-                width: 100%;
-                padding: $su-2 $su-9;
-                background: $white-2;
-            }
+
             .content {
                 display: block;
                 max-width: 100%;
@@ -54,34 +50,13 @@
                 font-size: $fs-l;
                 resize: none;
             }
-        }
 
-        .preview {
-            @include flex-column;
-            @include reader;
-            width: 100%;
-            min-height: 600px;
-            background: white;
-            border: $border-thin-darker;
-            border-radius: $radius-auto;
-            padding: $su-4 $su-9;
-
-            .title {
-                max-width: 100%;
-                font-weight: 800;
-                font-size: $fs-5xl;
-                font-family: $ff-content;
-                line-height: $lh-tight;
-            }
-
-            .tags {
-                margin: $su-5 0;
-            }
-
-            .content {
+            .preview {
+                @include reader;
                 display: block;
                 max-width: 100%;
-                margin-top: $su-3;
+                min-height: 54px;
+                margin: $su-5 $su-9;
                 font-family: $ff-content;
                 font-size: $fs-xl;
             }

@@ -1,4 +1,4 @@
-@mixin pop-up-in($duration: 0.1s) {
+@mixin pop-up-in($duration: 0.16s) {
     animation: popUpIn $duration ease forwards;
     @keyframes popUpIn {
         0% {
@@ -14,7 +14,7 @@
     }
 }
 
-@mixin pop-right-in($duration: 0.1s) {
+@mixin pop-right-in($duration: 0.16s) {
     animation: popRightIn $duration ease forwards;
     @keyframes popRightIn {
         0% {
@@ -30,7 +30,7 @@
     }
 }
 
-@mixin pop-left-in($duration: 0.1s) {
+@mixin pop-left-in($duration: 0.16s) {
     animation: popLeftIn $duration ease forwards;
     @keyframes popLeftIn {
         0% {
@@ -46,7 +46,7 @@
     }
 }
 
-@mixin pop-down-in($duration: 0.1s) {
+@mixin pop-down-in($duration: 0.16s) {
     animation: popDownIn $duration ease forwards;
     @keyframes popDownIn {
         0% {
@@ -83,19 +83,19 @@
 
         &[data-position='top'] {
             top: calc($margin * -2);
-            @include pop-up-in(0.16s);
+            @include pop-up-in;
         }
 
         &[data-position='right'] {
             left: calc(100% + $margin / 8);
             top: 50%;
             transform: translateX(0) translateY(-50%);
-            @include pop-right-in(0.16s);
+            @include pop-right-in;
         }
 
         &[data-position='bottom'] {
             bottom: calc($margin * -2);
-            @include pop-down-in(0.16s);
+            @include pop-down-in;
         }
 
         &[data-position='left'] {
@@ -103,7 +103,7 @@
             right: calc(100% + $margin / 6);
             top: 50%;
             transform: translateX(0) translateY(-50%);
-            @include pop-left-in(0.16s);
+            @include pop-left-in;
         }
     }
 }
