@@ -6,3 +6,8 @@ export interface Reaction extends Entity {
     comment?: Comment
     type: 'upvote' | 'downvote'
 }
+
+export interface ReactionCount {
+    upvote: number
+    downvote: number
+}

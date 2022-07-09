@@ -1,0 +1,19 @@
+.postList {
+    @include flex-column;
+    max-width: 100%;
+    height: calc(100vh - 54px);
+    overflow: scroll;
+
+    fieldset {
+        width: 100%;
+        margin-bottom: 10px;
+        @include phone {
+            margin-bottom: 6px;
+        }
+    }
+
+    main {
+        @include flex-column;
+        width: 100%;
+    }
+}

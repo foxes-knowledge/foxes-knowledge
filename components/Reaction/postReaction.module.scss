@@ -1,0 +1,29 @@
+.container {
+    @include flex-center(column);
+    width: 100%;
+    margin-top: $su-4;
+    &:first-child {
+        margin-top: 0;
+    }
+
+    .button {
+        @include grid-center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50px;
+        margin-bottom: $su-1;
+
+        svg {
+            fill: $dark-3;
+        }
+
+        &:hover {
+            background: $brand-blue-active;
+        }
+    }
+
+    .count {
+        color: $dark-3;
+        font-size: $fs-s;
+    }
+}

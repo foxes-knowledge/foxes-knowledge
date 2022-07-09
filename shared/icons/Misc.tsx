@@ -48,3 +48,34 @@ export const Settings = (props: React.SVGProps<SVGSVGElement>) => (
         <path d="M12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0-5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z" />
     </svg>
 )
+
+export const HeartBroken = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="m3.373 2 17.842 18.3-1.372 1.408-3.637-3.73L12.294 22l-8.23-8.453a6.061 6.061 0 0 1-1.476-4 6.059 6.059 0 0 1 1.51-3.986L2 3.409 3.373 2Zm2.108 10.183 6.813 6.999 2.54-2.611-9.36-9.6a4.043 4.043 0 0 0-.944 2.607c.002.958.34 1.882.951 2.605ZM20.294 5.35A6.047 6.047 0 0 1 21.998 9.4a6.064 6.064 0 0 1-1.475 4.146l-1.587 1.628-1.372-1.407 1.543-1.585a4.044 4.044 0 0 0 .95-2.752 4.03 4.03 0 0 0-1.137-2.676 3.834 3.834 0 0 0-2.635-1.163 3.823 3.823 0 0 0-2.693 1.01l-1.296 1.193L11 6.604a3.823 3.823 0 0 0-1.121-.72l-2.184-2.24a5.675 5.675 0 0 1 2.456.227 5.778 5.778 0 0 1 2.144 1.25 5.736 5.736 0 0 1 4.044-1.52 5.752 5.752 0 0 1 3.955 1.748Z" />
+    </svg>
+)
+
+export const ThreeDotsHorizontal = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" />
+    </svg>
+)
+
+export const ThreeDotsVertical = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+    </svg>
+)
+
+export const Grid = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="M12 17a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM5 17a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7-7a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM5 10a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7-7a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm7 0a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM5 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4Z" />
+    </svg>
+)
+
+export const Copy = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2ZM4 20V10h10l.002 10H4Zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10Z" />
+        <path d="M6 12h6v2H6v-2Zm0 4h6v2H6v-2Z" />
+    </svg>
+)
