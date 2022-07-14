@@ -30,21 +30,17 @@
                 resize: none;
                 border-radius: $radius-auto;
                 margin: $su-7 $su-9;
+                background: transparent;
             }
 
             .tags {
                 margin: 0 $su-9;
-                padding: $su-2;
-                border-radius: $radius-auto;
-                border: $border-thin;
                 margin-bottom: $su-3;
+                padding: $su-05;
+                border: $border-thin;
+                border-radius: $radius-auto;
             }
-            .controls {
-                @include flex-row;
-                width: 100%;
-                padding: $su-2 $su-9;
-                background: $white-2;
-            }
+
             .content {
                 display: block;
                 max-width: 100%;
@@ -54,6 +50,16 @@
                 font-size: $fs-l;
                 resize: none;
             }
+
+            .preview {
+                @include reader;
+                display: block;
+                max-width: 100%;
+                min-height: 54px;
+                margin: $su-5 $su-9;
+                font-family: $ff-content;
+                font-size: $fs-xl;
+            }
         }
 
         .options {
@@ -62,11 +68,7 @@
             width: 100%;
 
             button {
-                width: 28px;
-                height: 28px;
-                svg {
-                    fill: $dark-3;
-                }
+                margin-left: $su-4;
             }
         }
     }

@@ -1,6 +1,6 @@
-.inputSumbit {
+.inputSubmit {
     width: 100%;
-    background: $brand-blue;
+    background: $brand-orange;
     color: white;
     margin: 10px 0;
     border-radius: $radius-auto;
@@ -13,10 +13,10 @@
     @include transition;
 
     &:hover {
-        background: darken($brand-blue, 7%);
+        background: darken($brand-orange, 7%);
     }
     &:active {
-        background: lighten($brand-blue, 4%);
+        background: lighten($brand-orange, 4%);
     }
 
     @include phone {

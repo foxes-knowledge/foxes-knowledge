@@ -1,7 +1,8 @@
-import style from './markdownBtn.module.scss'
+import type { MarkdownType } from 'types/markdown'
+import style from './iconBtn.module.scss'
 
 type Props = {
-    name: string
+    name: MarkdownType
     Icon: React.ElementType
     onClick: React.MouseEventHandler<HTMLButtonElement>
 }
@@ -11,7 +12,7 @@ export const MarkdownBtn: React.FC<Props> = ({ name, Icon, onClick }) => (
         type="button"
         name={name}
         aria-label={`Markdown ${name}`}
-        className={style.markdownBtn}
+        className={style.iconBtn}
         onClick={onClick}
     >
         <Icon />

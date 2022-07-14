@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const InputSubmit: React.FC<Props> = props => (
-    <input className={style.inputSumbit} type="submit" value={props.label} style={props.style} />
+    <input className={style.inputSubmit} type="submit" value={props.label} style={props.style} />
 )
 
 InputSubmit.defaultProps = {
