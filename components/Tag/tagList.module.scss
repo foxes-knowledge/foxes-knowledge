@@ -1,0 +1,10 @@
+.tagList {
+    @include flex-row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: $su-1 0;
+
+    @include phone {
+        margin: $su-05 0;
+    }
+}

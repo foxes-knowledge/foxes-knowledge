@@ -5,7 +5,7 @@ import { SelectableBtn } from '@/Buttons/SelectableBtn'
 import type { Post } from 'types/Post'
 import { PostItem } from './PostItem'
 
-import style from './post.module.scss'
+import style from './postList.module.scss'
 
 type Props = {
     posts: Post[]

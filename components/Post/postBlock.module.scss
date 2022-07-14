@@ -1,0 +1,122 @@
+.postContent {
+    min-height: 160px;
+    background: white;
+    width: 100%;
+    border: $border-thin-darker;
+    border-radius: $radius-auto;
+    padding: $su-5 $su-8;
+    margin: 0 $su-3;
+
+    .title {
+        font-size: $fs-3xl;
+        font-weight: 700;
+
+        @include phone {
+            padding: $su-2;
+            font-size: $fs-l;
+        }
+    }
+
+    .tags {
+        @include flex-row;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: $su-5 0;
+
+        @include phone {
+            margin: $su-05 0;
+        }
+
+        button {
+            padding: $su-2;
+            font-size: $fs-l;
+            border: 1px solid transparent;
+            border-radius: $radius-auto;
+
+            @include phone {
+                font-size: $fs-s;
+            }
+        }
+    }
+
+    .content {
+        width: 100%;
+        font-size: $fs-xl;
+        margin-bottom: $su-6;
+        text-indent: 2em;
+        line-height: $fs-2xl;
+        text-align: justify;
+        @include phone {
+            font-size: $fs-s;
+        }
+    }
+
+    .buttonBlock {
+        margin: $su-5 0;
+        display: flex;
+        justify-content: space-between;
+
+        button {
+            width: 30%;
+            padding: $su-4 $su-5;
+            border-radius: $radius-large;
+            border: $border-thin-darker;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: pre;
+            font-size: $fs-l;
+            margin-bottom: $su-2;
+            font-weight: 600;
+            @include phone {
+                font-size: $fs-s;
+                padding: $su-1 $su-2;
+            }
+        }
+    }
+
+    .discussion {
+        font-size: $fs-2xl;
+        font-weight: 700;
+        margin-bottom: $su-5;
+        @include phone {
+            font-size: $fs-l;
+            padding: $su-1 $su-2;
+        }
+    }
+
+    .newComment {
+        display: flex;
+        justify-content: space-around;
+
+        .imageContainer {
+            display: flex;
+            border-radius: 50%;
+            overflow: hidden;
+            width: 34px;
+            height: 34px;
+            margin-right: $su-3;
+
+            @include phone {
+                width: 35px;
+                height: 30px;
+            }
+
+            picture {
+                @include grid-center;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            border-radius: $radius-large;
+            border: $border-thin-darker;
+
+            @include phone {
+                height: 70px;
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+.userContent {
+    min-height: 190px;
+    width: 420px;
+    border: $border-thin-darker;
+    border-radius: $radius-auto;
+    padding: $su-3 $su-3;
+    background: linear-gradient(to bottom, #ff9f9f 55px, #ff9f9f 55px, #ffffff 55px);
+    @include phone {
+        width: 40%;
+        min-width: 20%;
+    }
+
+    .userBlock {
+        display: flex;
+        .imageContainer {
+            display: flex;
+            border-radius: 50%;
+            overflow: hidden;
+            width: 60px;
+            height: 60px;
+            min-width: 30px;
+            min-height: 30px;
+            margin-top: $su-3;
+            @include phone {
+                width: 35px;
+                height: 35px;
+                margin-top: $su-6;
+            }
+
+            picture {
+                @include grid-center;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .userName {
+            margin-top: $su-88;
+            font-size: $fs-l;
+            font-weight: 600;
+            @include phone {
+                margin-top: $su-8;
+                font-size: $fs-s;
+            }
+        }
+    }
+
+    .bio {
+        margin-top: $su-4;
+        font-size: $fs-l;
+        text-align: justify;
+    }
+}
