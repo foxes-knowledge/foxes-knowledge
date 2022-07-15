@@ -1,4 +1,4 @@
-export type MarkdownType =
+declare type MarkdownType =
     | 'bold'
     | 'italic'
     | 'link'

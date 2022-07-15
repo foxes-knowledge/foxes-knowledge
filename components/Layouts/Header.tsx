@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Logo } from '#/icons/Brand'
 import { Search } from '#/icons/Misc'
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
-import type { User } from 'types/User'
 
 import style from './header.module.scss'
 

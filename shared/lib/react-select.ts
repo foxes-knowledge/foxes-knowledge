@@ -1,5 +1,4 @@
 import type { StylesConfig } from 'react-select'
-import type { Tag } from 'types/Tag'
 import color from './color'
 
 export const tagStyles: StylesConfig = {

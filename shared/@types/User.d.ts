@@ -1,6 +1,4 @@
-import { Entity } from './Entity'
-
-export interface User extends Entity {
+declare interface User extends Entity {
     username: string
     name?: string
     email: string

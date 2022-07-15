@@ -1,10 +1,11 @@
 .userContent {
-    min-height: 190px;
-    width: 420px;
+    @include flex-column;
+    width: inherit;
     border: $border-thin-darker;
     border-radius: $radius-auto;
-    padding: $su-3 $su-3;
-    background: linear-gradient(to bottom, #ff9f9f 55px, #ff9f9f 55px, #ffffff 55px);
+    background: white;
+    padding: $su-4;
+
     @include phone {
         width: 40%;
         min-width: 20%;

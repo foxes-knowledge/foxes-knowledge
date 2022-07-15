@@ -1,7 +1,5 @@
 .navigation {
     width: 240px;
-    min-width: 120px;
-    margin-right: $su-4;
 
     @include phone {
         margin-right: 0;
@@ -9,6 +7,8 @@
     }
 
     ul {
+        @include sticky-aside;
+        width: inherit;
         list-style: none;
 
         @include phone {

@@ -1,4 +1,3 @@
-import type { MarkdownType } from 'types/markdown'
 import style from './iconBtn.module.scss'
 
 type Props = {

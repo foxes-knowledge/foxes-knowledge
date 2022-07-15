@@ -6,7 +6,7 @@
         gap: $su-3;
 
         @include phone {
-            padding-top: 6px;
+            padding-top: $su-1;
             flex-direction: column;
             width: 95%;
         }

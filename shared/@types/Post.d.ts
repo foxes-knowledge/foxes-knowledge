@@ -1,9 +1,4 @@
-import { Entity } from './Entity'
-import { Reaction, ReactionCount } from './Reaction'
-import { Tag } from './Tag'
-import { User } from './User'
-
-export interface Post extends Entity {
+declare interface Post extends Entity {
     user: User
     title: string
     content: string

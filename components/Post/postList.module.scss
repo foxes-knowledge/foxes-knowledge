@@ -1,10 +1,7 @@
-.postList {
+.container {
     @include flex-column;
-    max-width: 100%;
-    height: calc(100vh - 54px);
-    overflow: scroll;
 
-    fieldset {
+    .filters {
         width: 100%;
         margin-bottom: 10px;
         @include phone {
@@ -12,8 +9,8 @@
         }
     }
 
-    main {
+    .list {
         @include flex-column;
-        width: 100%;
+        gap: $su-2;
     }
 }

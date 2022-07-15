@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 import { SelectableBtn } from '@/Buttons/SelectableBtn'
-import type { Post } from 'types/Post'
 import { PostItem } from './PostItem'
 
 import style from './postList.module.scss'
@@ -26,12 +25,12 @@ export const PostList: React.FC<Props> = ({ posts }) => {
     }
 
     return (
-        <div className={style.postList}>
-            <fieldset>
+        <div className={style.container}>
+            <fieldset className={style.filters}>
                 <SelectableBtn name="latest" onClick={handleChange} selected={order === 'latest'} />
                 <SelectableBtn name="top" onClick={handleChange} selected={order === 'top'} />
             </fieldset>
-            <main>
+            <main className={style.list}>
                 {posts.map(post => (
                     <PostItem key={post.id} post={post} />
                 ))}

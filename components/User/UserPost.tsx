@@ -1,8 +1,6 @@
 import Image from 'next/image'
 
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
-import type { User } from 'types/User'
-
 import style from './userPost.module.scss'
 
 type Props = {

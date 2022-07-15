@@ -1,5 +1,9 @@
-.reactions {
-    display: block;
-    min-width: 64px;
-    padding-top: $su-9;
+.container {
+    width: 42px;
+    .reactions {
+        @include flex-column;
+        @include sticky-aside;
+        padding-top: $su-9;
+        gap: $su-5;
+    }
 }

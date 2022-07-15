@@ -1,54 +1,29 @@
-.postContent {
-    min-height: 160px;
-    background: white;
+.post {
+    @include flex-column;
     width: 100%;
+    min-width: 0;
+    background: white;
     border: $border-thin-darker;
     border-radius: $radius-auto;
     padding: $su-5 $su-8;
-    margin: 0 $su-3;
 
     .title {
-        font-size: $fs-3xl;
-        font-weight: 700;
-
-        @include phone {
-            padding: $su-2;
-            font-size: $fs-l;
-        }
-    }
-
-    .tags {
-        @include flex-row;
-        flex-wrap: wrap;
-        width: 100%;
+        font-size: $fs-5xl;
+        font-weight: 800;
         margin: $su-5 0;
+        margin-bottom: $su-1;
 
         @include phone {
-            margin: $su-05 0;
-        }
-
-        button {
             padding: $su-2;
             font-size: $fs-l;
-            border: 1px solid transparent;
-            border-radius: $radius-auto;
-
-            @include phone {
-                font-size: $fs-s;
-            }
         }
     }
 
     .content {
+        @include reader;
         width: 100%;
-        font-size: $fs-xl;
-        margin-bottom: $su-6;
-        text-indent: 2em;
-        line-height: $fs-2xl;
-        text-align: justify;
-        @include phone {
-            font-size: $fs-s;
-        }
+        margin: $su-6 0;
+        line-height: $lh-base;
     }
 
     .buttonBlock {

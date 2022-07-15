@@ -38,15 +38,15 @@
 }
 
 @mixin page-base {
-    @include flex-column;
+    @include flex-center(column);
     width: 100%;
-    align-items: center;
 }
 
 @mixin container-base($direction: column) {
     display: flex;
     flex-direction: $direction;
     width: 66%;
+    padding: $layout-padding;
     @if $direction == row {
         justify-content: flex-start;
         align-items: center;
@@ -56,9 +56,16 @@
     }
 }
 
+@mixin sticky-aside {
+    width: inherit;
+    position: sticky;
+    top: calc($header-height + $layout-padding);
+}
+
 @mixin reader {
     p {
         margin: 1em 0;
+        font-size: $fs-xl;
         &:first-child {
             margin-top: 0;
         }
@@ -93,6 +100,7 @@
         color: $white-0;
         border-radius: $radius-auto;
         padding: $su-3;
+        overflow-x: auto;
         ::selection {
             background: $brand-pink;
         }
@@ -103,5 +111,8 @@
         color: $white-0;
         border-radius: $radius-auto;
         padding: $su-1;
+    }
+    h1 {
+        font-size: $fs-3xl;
     }
 }

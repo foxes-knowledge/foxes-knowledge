@@ -1,7 +1,5 @@
-import Link from 'next/link'
-
 import color from '#/lib/color'
-import type { Tag } from 'types/Tag'
+import Link from 'next/link'
 
 import style from './tagItem.module.scss'
 
@@ -24,8 +22,8 @@ export const TagItem: React.FC<Props> = ({ tag }) => {
         <Link key={tag.id} href={`/t/${tag.id}`}>
             <button
                 className={style.tagItem}
-                onMouseOver={({ currentTarget }) => handleMouseOver(currentTarget, tag)}
-                onMouseOut={handleMouseOut}
+                onMouseEnter={({ currentTarget }) => handleMouseOver(currentTarget, tag)}
+                onMouseLeave={handleMouseOut}
             >
                 <small style={{ color: tag.color, fontWeight: 700, marginRight: 2 }}>#</small>
                 {tag.name}

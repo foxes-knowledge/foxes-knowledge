@@ -1,7 +1,6 @@
 import { Loading, Success, Warning } from '#/icons/Toast'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import type { ResponseData } from 'types/Fetch'
 import style from './toaster.module.scss'
 
 const ProviderContext = createContext<Toast>(null!)

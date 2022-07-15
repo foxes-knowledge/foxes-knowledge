@@ -6,9 +6,7 @@ import { IconBtn } from '@/Buttons/IconBtn'
 import { TextBtn } from '@/Buttons/TextButton'
 
 import { useAppSelector } from 'redux/hooks'
-import type { Post } from 'types/Post'
 
-import { Paginated } from 'types/Entity'
 import style from './newPostSettings.module.scss'
 
 type Props = {

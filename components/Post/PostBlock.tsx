@@ -1,9 +1,8 @@
-import Image from 'next/image'
-
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
-import type { Post } from 'types/Post'
-
 import { TagList } from '@/Tag/TagList'
+import { UserPostItem } from '@/User/UserPostItem'
+import Markdown from 'markdown-to-jsx'
+import Image from 'next/image'
 import style from './postBlock.module.scss'
 
 type Props = {
@@ -11,14 +10,20 @@ type Props = {
 }
 
 export const PostBlock: React.FC<Props> = ({ post }) => (
-    <section className={style.postContent}>
+    <article className={style.post}>
+        <UserPostItem user={post.user} postDate={post.created_at} />
+
         <h1 className={style.title}>{post.title}</h1>
+
         <TagList tags={post.tags} />
-        <div className={style.content}>{post.content}</div>
+
+        <Markdown className={style.content}>{post.content}</Markdown>
+
         <div className={style.buttonBlock}>
             {post.parent && <button>Back - {post.parent.title}</button>}
             {post.child && <button>Next - {post.child.title}</button>}
         </div>
+
         <h2 className={style.discussion}>Discussion ({(post.comments as Comment[]).length})</h2>
         <div className={style.newComment}>
             <picture className={style.imageContainer}>
@@ -30,5 +35,5 @@ export const PostBlock: React.FC<Props> = ({ post }) => (
             </picture>
             <textarea name="" id="" />
         </div>
-    </section>
+    </article>
 )
