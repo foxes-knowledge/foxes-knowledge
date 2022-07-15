@@ -23,18 +23,6 @@ const Home: NextPage<Props> = ({ session, posts, tags }) => {
                 <PostList posts={posts.data} />
                 <HomeAside tags={tags} />
             </div>
-            {/* <button
-                onClick={async () => {
-                    success('Goodbye!')
-                    await fetch('/api/signout', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                    })
-                    router.push('/guest')
-                }}
-            >
-                Logout
-            </button> */}
         </PageLayout>
     )
 }

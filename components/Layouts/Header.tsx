@@ -1,10 +1,9 @@
-import Image from 'next/image'
 import Link from 'next/link'
+
+import { HeaderDropdown } from '@/Dropdowns/HeaderDropdown'
 
 import { Logo } from '#/icons/Brand'
 import { Search } from '#/icons/Misc'
-import { SimpleImage } from '@/SimpleImage/SimpleImage'
-
 import style from './header.module.scss'
 
 export const Header: React.FC<{ user: User }> = ({ user }) => {
@@ -27,17 +26,7 @@ export const Header: React.FC<{ user: User }> = ({ user }) => {
                     <Link href={'/new'}>
                         <a className={style.createBtn}>Create post</a>
                     </Link>
-                    <div className={style.headerUser}>
-                        {user.picture ? (
-                            <Image src={user.picture} alt="profile_picture" />
-                        ) : (
-                            <SimpleImage
-                                username={user.username}
-                                color={user.color}
-                                style={{ padding: 10 }}
-                            />
-                        )}
-                    </div>
+                    <HeaderDropdown user={user} />
                 </div>
             </div>
         </header>

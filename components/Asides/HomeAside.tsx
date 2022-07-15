@@ -1,5 +1,5 @@
 import { TopTagsList } from '@/Listings/TopTagsList'
-import style from './postAside.module.scss'
+import style from './rightAside.module.scss'
 
 type Props = {
     tags: Tag[]

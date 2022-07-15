@@ -107,12 +107,6 @@
                 }
             }
 
-            .headerUser {
-                @include unselectable;
-                margin-left: 20px;
-                cursor: pointer;
-            }
-
             @include phone {
                 height: 40px;
                 margin-left: 20px;

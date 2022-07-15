@@ -1,5 +1,5 @@
 import { UserPost } from '@/User/UserPost'
-import style from './postAside.module.scss'
+import style from './rightAside.module.scss'
 
 type Props = {
     post: Post
