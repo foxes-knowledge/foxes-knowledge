@@ -1,9 +1,9 @@
 import Markdown from 'markdown-to-jsx'
 
-import { CommentItem } from '@/Discussion/CommentItem'
-import { NewComment } from '@/Discussion/NewComment'
 import { TagList } from '@/Tag/TagList'
 import { UserPostItem } from '@/User/UserPostItem'
+
+import { Discussion } from '@/Discussion/Discussion'
 import style from './postBlock.module.scss'
 
 type Props = {
@@ -25,10 +25,6 @@ export const PostBlock: React.FC<Props> = ({ post }) => (
             {post.child && <button>Next - {post.child.title}</button>}
         </div>
 
-        <h2 className={style.discussion}>Discussion ({(post.comments as Comment[]).length})</h2>
-        <NewComment />
-        {(post.comments as Comment[]).map(comment => (
-            <CommentItem key={comment.id} comment={comment} />
-        ))}
+        <Discussion comments={post.comments as Comment[]} />
     </article>
 )

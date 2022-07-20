@@ -48,14 +48,4 @@
             }
         }
     }
-
-    .discussion {
-        font-size: $fs-2xl;
-        font-weight: 700;
-        margin-bottom: $su-5;
-        @include phone {
-            font-size: $fs-l;
-            padding: $su-1 $su-2;
-        }
-    }
 }
