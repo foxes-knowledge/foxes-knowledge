@@ -58,40 +58,4 @@
             padding: $su-1 $su-2;
         }
     }
-
-    .newComment {
-        display: flex;
-        justify-content: space-around;
-
-        .imageContainer {
-            display: flex;
-            border-radius: 50%;
-            overflow: hidden;
-            width: 34px;
-            height: 34px;
-            margin-right: $su-3;
-
-            @include phone {
-                width: 35px;
-                height: 30px;
-            }
-
-            picture {
-                @include grid-center;
-                width: 100%;
-                height: 100%;
-            }
-        }
-
-        textarea {
-            width: 100%;
-            height: 100px;
-            border-radius: $radius-large;
-            border: $border-thin-darker;
-
-            @include phone {
-                height: 70px;
-            }
-        }
-    }
 }

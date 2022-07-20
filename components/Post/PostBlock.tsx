@@ -1,8 +1,9 @@
-import { SimpleImage } from '@/SimpleImage/SimpleImage'
+import Markdown from 'markdown-to-jsx'
+
+import { CommentItem } from '@/Discussion/CommentItem'
+import { NewComment } from '@/Discussion/NewComment'
 import { TagList } from '@/Tag/TagList'
 import { UserPostItem } from '@/User/UserPostItem'
-import Markdown from 'markdown-to-jsx'
-import Image from 'next/image'
 import style from './postBlock.module.scss'
 
 type Props = {
@@ -25,15 +26,9 @@ export const PostBlock: React.FC<Props> = ({ post }) => (
         </div>
 
         <h2 className={style.discussion}>Discussion ({(post.comments as Comment[]).length})</h2>
-        <div className={style.newComment}>
-            <picture className={style.imageContainer}>
-                {post.user.picture ? (
-                    <Image src={post.user.picture!} alt="user_picture" width={35} height={35} />
-                ) : (
-                    <SimpleImage username={post.user.username} color={post.user.color} />
-                )}
-            </picture>
-            <textarea name="" id="" />
-        </div>
+        <NewComment />
+        {(post.comments as Comment[]).map(comment => (
+            <CommentItem key={comment.id} comment={comment} />
+        ))}
     </article>
 )
