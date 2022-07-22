@@ -13,15 +13,18 @@ type Props = {
     post: Post
 }
 
-const Post: NextPage<Props> = ({ session, post }) => (
-    <PageLayout title={post.title} session={session} className={style.homePage}>
-        <div className={style.pageContainer}>
-            <PostReactions reactions={post.reactions as ReactionCount} />
-            <PostBlock post={post} />
-            <PostAside post={post} />
-        </div>
-    </PageLayout>
-)
+const Post: NextPage<Props> = ({ session, post }) => {
+    console.log(post)
+    return (
+        <PageLayout title={post.title} session={session} className={style.homePage}>
+            <div className={style.pageContainer}>
+                <PostReactions reactions={post.reactions as Reaction[]} />
+                <PostBlock post={post} />
+                <PostAside post={post} />
+            </div>
+        </PageLayout>
+    )
+}
 
 export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
     if (!req.session.token) {
