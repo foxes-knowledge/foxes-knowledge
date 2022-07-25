@@ -9,5 +9,5 @@ interface Store {
 export const useSessionStore = create<Store>(set => ({
     user: {} as User,
     token: {} as Token,
-    setSession: session => set(() => ({ user: session.user, token: session.token })),
+    setSession: session => set({ user: session.user, token: session.token }),
 }))

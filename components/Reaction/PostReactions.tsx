@@ -1,6 +1,11 @@
-import { Heart, HeartBroken, ThreeDotsHorizontal } from '#/icons/Misc'
+import { useState } from 'react'
+
+import { Heart, HeartBroken, HeartBrokenFilled, HeartFilled } from '#/icons/Misc'
 import { countBy } from '#/lib/countBy'
+import { useSessionStore } from 'zustand/session'
+
 import { PostReaction } from './PostReaction'
+
 import style from './postReactions.module.scss'
 
 type Props = {
@@ -8,22 +13,31 @@ type Props = {
 }
 
 export const PostReactions: React.FC<Props> = ({ reactions }) => {
-    const handleReaction: React.MouseEventHandler<HTMLButtonElement> = () => {}
+    const user = useSessionStore(state => state.user)
+    const [reacted, setReacted] = useState(
+        reactions.find(reaction => reaction.user_id === user.id)?.type
+    )
+
+    const handleReaction: React.MouseEventHandler<HTMLButtonElement> = ({ currentTarget }) => {
+        setReacted(currentTarget.name as ReactionType)
+    }
 
     return (
         <aside className={style.container}>
             <div className={style.reactions}>
                 <PostReaction
-                    Icon={Heart}
+                    name="upvote"
+                    Icon={reacted === 'upvote' ? HeartFilled : Heart}
                     count={countBy(reactions, 'type', 'upvote')}
                     onClick={handleReaction}
                 />
                 <PostReaction
-                    Icon={HeartBroken}
+                    name="downvote"
+                    Icon={reacted === 'downvote' ? HeartBrokenFilled : HeartBroken}
                     count={countBy(reactions, 'type', 'downvote')}
                     onClick={handleReaction}
                 />
-                <PostReaction Icon={ThreeDotsHorizontal} onClick={() => null} />
+                {/* <PostReaction Icon={ThreeDotsHorizontal} onClick={() => null} /> */}
             </div>
         </aside>
     )

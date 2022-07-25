@@ -5,5 +5,5 @@
  * @param value Expected value.
  * @returns Number of successful matches.
  */
-export const countBy = (array: any[], key: string, value: string) =>
+export const countBy = (array: { [x: string]: any }[], key: string, value: string) =>
     array.filter(obj => obj[key] === value).length
