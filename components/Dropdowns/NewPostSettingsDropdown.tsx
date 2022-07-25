@@ -5,7 +5,7 @@ import { Settings } from '#/icons/Misc'
 import { IconBtn } from '@/Buttons/IconBtn'
 import { TextBtn } from '@/Buttons/TextButton'
 
-import { useAppSelector } from 'redux/hooks'
+import { useSessionStore } from 'zustand/session'
 
 import style from './newPostSettings.module.scss'
 
@@ -15,7 +15,7 @@ type Props = {
 
 export const NewPostSettingsDropdown: React.FC<Props> = ({ parentState }) => {
     const [rendered, setRendered] = useState(false)
-    const token = useAppSelector(state => state.session.token)
+    const token = useSessionStore(state => state.token)
 
     const handleDone: React.MouseEventHandler<HTMLButtonElement> = () => setRendered(a => !a)
 

@@ -4,8 +4,6 @@ import nprogress from 'nprogress'
 
 import { ToastProvider } from '#/modules/toaster/Toaster'
 import type { AppProps } from 'next/app'
-import { Provider } from 'react-redux'
-import { store } from 'redux/store'
 
 import 'styles/globals.css'
 import 'styles/nprogress.css'
@@ -26,9 +24,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
             </Head>
             <ToastProvider>
-                <Provider store={store}>
-                    <Component {...pageProps} />
-                </Provider>
+                <Component {...pageProps} />
             </ToastProvider>
         </>
     )

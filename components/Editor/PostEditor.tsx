@@ -12,7 +12,7 @@ import { MarkdownBar } from '@/Markdown/MarkdownBar'
 import { markdownHandler } from '#/lib/markdown'
 import { tagStyles } from '#/lib/react-select'
 import { useToast } from '#/modules/toaster/Toaster'
-import { useAppSelector } from 'redux/hooks'
+import { useSessionStore } from 'zustand/session'
 
 import style from './postEditor.module.scss'
 
@@ -31,8 +31,7 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
     const router = useRouter()
     const { promise } = useToast()
     const contentRef = useRef<HTMLTextAreaElement>(null)
-
-    const session = useAppSelector(state => state.session)
+    const session = useSessionStore()
 
     const handleModeChange: React.MouseEventHandler<HTMLButtonElement> = ({ currentTarget }) => {
         setMode(currentTarget.name as Mode)
@@ -60,7 +59,7 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `${session.token.type} ${session.token.value}`,
+                    Authorization: `${session.token.type} ${session.token!.value}`,
                 },
                 body: JSON.stringify({
                     user_id: session.user.id,

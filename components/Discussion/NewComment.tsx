@@ -3,12 +3,12 @@ import { useState } from 'react'
 
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import ReactTextareaAutosize from 'react-textarea-autosize'
-import { useAppSelector } from 'redux/hooks'
+import { useSessionStore } from 'zustand/session'
 
 import style from './newComment.module.scss'
 
 export const NewComment: React.FC = () => {
-    const user = useAppSelector(state => state.session.user)
+    const user = useSessionStore(state => state.user)
     const [content, setContent] = useState('')
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
