@@ -1,4 +1,3 @@
-import type { Tag } from 'types/Tag'
 import { TagItem } from './TagItem'
 import style from './tagList.module.scss'
 
@@ -7,7 +6,7 @@ type Props = {
 }
 
 export const TagList: React.FC<Props> = ({ tags }) => (
-    <div className={style.tags}>
+    <div className={style.tagList}>
         {tags.map(tag => (
             <TagItem key={tag.id} tag={tag} />
         ))}

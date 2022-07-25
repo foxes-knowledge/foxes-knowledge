@@ -1,22 +1,4 @@
-@mixin pop-up-in($duration: 0.16s) {
-    animation: popUpIn $duration ease forwards;
-    @keyframes popUpIn {
-        0% {
-            opacity: 0;
-            transform: translateY(10%);
-        }
-        50% {
-            opacity: 0.5;
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-}
-
 .dropdown {
-    @include pop-up-in;
     position: absolute;
     min-width: 360px;
     max-width: 360px;
@@ -53,6 +35,21 @@
             font-size: $fs-s;
             font-weight: 400;
             margin-bottom: $su-25;
+        }
+    }
+
+    animation: popUpIn 160ms ease forwards;
+    @keyframes popUpIn {
+        0% {
+            opacity: 0;
+            transform: translateY(10%);
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 }

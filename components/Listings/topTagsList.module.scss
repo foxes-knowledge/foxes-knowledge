@@ -1,10 +1,7 @@
 .topTagsList {
     @include flex-column;
-    width: 320px;
     border-radius: $radius-auto;
     border: $border-thin;
-    overflow: hidden;
-    margin-left: 10px;
     background: white;
 
     @include phone {

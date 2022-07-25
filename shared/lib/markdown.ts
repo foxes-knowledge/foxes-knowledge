@@ -1,8 +1,3 @@
-import insane from 'insane'
-import { marked } from 'marked'
-
-import { MarkdownType } from 'types/markdown'
-
 /**
  * Parses a string into a Markdown string using the given Markdown type.
  * @param type The type of Markdown to parse.
@@ -34,14 +29,6 @@ export const markdownHandler = (type: MarkdownType, content = ''): string => {
             return content
     }
 }
-
-/**
- * Parses markdown string into a sanitized HTML
- * @param text The text to parse and sanitize.
- * @returns The sanitized HTML string.
- * @example '# Hello world!' // returns '<h1>Hello world!</h1>'
- */
-export const parseMarkdown = (text: string): string => insane(marked.parse(text))
 
 /**
  * Parses given string into a Markdown Ordered List.

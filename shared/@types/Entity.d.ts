@@ -1,10 +1,10 @@
-export interface Entity {
+declare interface Entity {
     id: number
     created_at: string
-    updated_at: string
+    updated_at?: string
 }
 
-export interface Paginated<T> {
+declare interface Paginated<T> {
     current_page: number
     data: T[]
     first_page_url: string

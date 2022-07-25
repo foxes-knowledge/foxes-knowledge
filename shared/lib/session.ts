@@ -32,3 +32,10 @@ export function withSessionSsr<P extends { [key: string]: any } = { [key: string
 ) {
     return withIronSessionSsr(handler, sessionOptions)
 }
+
+declare module 'iron-session' {
+    interface IronSessionData {
+        user: User
+        token: Token
+    }
+}

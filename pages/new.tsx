@@ -3,7 +3,6 @@ import { PostEditor } from '@/Editor/PostEditor'
 import { PageLayout } from '@/Layouts/PageLayout'
 
 import type { NextPage } from 'next'
-import type { Session } from 'types/Session'
 
 import style from 'styles/pages/new.module.scss'
 

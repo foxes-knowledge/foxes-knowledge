@@ -1,4 +1,4 @@
-export type ResponseData = {
+declare type ResponseData = {
     message: string
     [x: string]: any
 }

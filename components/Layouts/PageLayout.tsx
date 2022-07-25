@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 
 import { useAppDispatch } from 'redux/hooks'
 import { setSession } from 'redux/slices/sessionSlice'
-import type { Session } from 'types/Session'
 import { Header } from './Header'
 
 type Props = {
@@ -23,7 +22,7 @@ export const PageLayout: React.FC<Props> = ({ title, className, session, childre
     return (
         <>
             <Head>
-                <title>{title! + (mode === 'cont' && ' ∣ Foxes Knowledge')}</title>
+                <title>{title! + (mode === 'cont' ? ' ∣ Foxes Knowledge' : '')}</title>
             </Head>
             {mode === 'cont' && <Header user={session?.user!} />}
             <div className={className}>{children}</div>

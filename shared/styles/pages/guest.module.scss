@@ -38,7 +38,7 @@
         font-size: 1.2rem;
         font-weight: 500;
         margin: 24px 0;
-        box-shadow: $shadow-default;
+        box-shadow: $shadow-dropdown;
 
         @include transition(200ms);
         &:hover {

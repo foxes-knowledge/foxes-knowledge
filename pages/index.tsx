@@ -3,13 +3,9 @@ import { PageLayout } from '@/Layouts/PageLayout'
 import { NavigationBar } from '@/Navigation/NavigationBar'
 
 import type { NextPage } from 'next'
-import type { Paginated } from 'types/Entity'
-import type { Post } from 'types/Post'
-import type { Session } from 'types/Session'
-import type { Tag } from 'types/Tag'
 
 import { queryBuilder } from '#/lib/queryBuilder'
-import { TopTagsList } from '@/Listings/TopTagsList'
+import { HomeAside } from '@/Asides/HomeAside'
 import { PostList } from '@/Post/PostList'
 import style from 'styles/pages/index.module.scss'
 
@@ -25,20 +21,8 @@ const Home: NextPage<Props> = ({ session, posts, tags }) => {
             <div className={style.pageContainer}>
                 <NavigationBar />
                 <PostList posts={posts.data} />
-                <TopTagsList tags={tags} />
+                <HomeAside tags={tags} />
             </div>
-            {/* <button
-                onClick={async () => {
-                    success('Goodbye!')
-                    await fetch('/api/signout', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                    })
-                    router.push('/guest')
-                }}
-            >
-                Logout
-            </button> */}
         </PageLayout>
     )
 }

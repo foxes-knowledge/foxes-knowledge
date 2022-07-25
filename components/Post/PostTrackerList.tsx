@@ -1,6 +1,5 @@
 import { BookOpen, Comment, Heart } from '#/icons/Misc'
 import { getTextReadingTime } from '#/lib/readingTime'
-import type { Post } from 'types/Post'
 import { PostTracker } from './PostTracker'
 
 import style from './postTrackerList.module.scss'

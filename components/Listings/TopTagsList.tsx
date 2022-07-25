@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import type { Tag } from 'types/Tag'
 
 import style from './topTagsList.module.scss'
 

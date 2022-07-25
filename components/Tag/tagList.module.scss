@@ -2,6 +2,7 @@
     @include flex-row;
     flex-wrap: wrap;
     width: 100%;
+    gap: $su-1;
     margin: $su-1 0;
 
     @include phone {

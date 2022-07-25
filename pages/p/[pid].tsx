@@ -2,29 +2,29 @@ import { withSessionSsr } from '#/lib/session'
 import { PageLayout } from '@/Layouts/PageLayout'
 import { PostBlock } from '@/Post/PostBlock'
 import { PostReactions } from '@/Reaction/PostReactions'
-import { UserPost } from '@/User/UserPost'
 
 import type { NextPage } from 'next'
-import type { Post } from 'types/Post'
-import type { ReactionCount } from 'types/Reaction'
-import type { Session } from 'types/Session'
 
-import style from 'styles/pages/index.module.scss'
+import { PostAside } from '@/Asides/PostAside'
+import style from 'styles/pages/post.module.scss'
 
 type Props = {
     session: Session
     post: Post
 }
 
-const Post: NextPage<Props> = ({ session, post }) => (
-    <PageLayout title="Post" session={session} className={style.homePage}>
-        <div className={style.pageContainer}>
-            <PostReactions reactions={post.reactions as ReactionCount} />
-            <PostBlock post={post} />
-            <UserPost user={post.user} />
-        </div>
-    </PageLayout>
-)
+const Post: NextPage<Props> = ({ session, post }) => {
+    console.log(post)
+    return (
+        <PageLayout title={post.title} session={session} className={style.homePage}>
+            <div className={style.pageContainer}>
+                <PostReactions reactions={post.reactions as Reaction[]} />
+                <PostBlock post={post} />
+                <PostAside post={post} />
+            </div>
+        </PageLayout>
+    )
+}
 
 export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
     if (!req.session.token) {

@@ -4,7 +4,7 @@
         "paths": {
             "@/*": ["components/*"],
             "styles/*": ["shared/styles/*"],
-            "types/*": ["shared/typings/*"],
+            "types/*": ["shared/@types/*"],
             "redux/*": ["redux/*"],
             "#/*": ["shared/*"]
         },
@@ -24,7 +24,7 @@
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "isolatedModules": true,
         "jsx": "preserve",
-        "typeRoots": ["src/typings", "node_modules/@types"]
+        "typeRoots": ["src/@types", "node_modules/@types"]
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
     "exclude": ["node_modules", "cypress"]

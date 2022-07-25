@@ -1,3 +1,4 @@
+import Markdown from 'markdown-to-jsx'
 import { useRouter } from 'next/router'
 import { useRef, useState } from 'react'
 import AsyncSelect from 'react-select/async'
@@ -8,11 +9,7 @@ import { NewPostSettingsDropdown } from '@/Dropdowns/NewPostSettingsDropdown'
 import { InputSubmit } from '@/Inputs/InputSubmit'
 import { MarkdownBar } from '@/Markdown/MarkdownBar'
 
-import type { MarkdownType } from 'types/markdown'
-import type { Post } from 'types/Post'
-import type { Tag } from 'types/Tag'
-
-import { markdownHandler, parseMarkdown } from '#/lib/markdown'
+import { markdownHandler } from '#/lib/markdown'
 import { tagStyles } from '#/lib/react-select'
 import { useToast } from '#/modules/toaster/Toaster'
 import { useAppSelector } from 'redux/hooks'
@@ -147,10 +144,7 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
                             />
                         </>
                     ) : (
-                        <div
-                            className={style.preview}
-                            dangerouslySetInnerHTML={{ __html: parseMarkdown(content) }}
-                        ></div>
+                        <Markdown className={style.preview}>{content}</Markdown>
                     )}
                 </section>
                 <fieldset className={style.options}>

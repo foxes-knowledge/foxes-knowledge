@@ -2,7 +2,6 @@ import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
-import type { User } from 'types/User'
 
 import style from './userPostItem.module.scss'
 

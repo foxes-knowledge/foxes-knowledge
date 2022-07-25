@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { PostTrackerList } from '@/Post/PostTrackerList'
 import { TagList } from '@/Tag/TagList'
 import { UserPostItem } from '@/User/UserPostItem'
-import type { Post } from 'types/Post'
 
 import style from './postItem.module.scss'
 

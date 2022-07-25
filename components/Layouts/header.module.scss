@@ -1,9 +1,10 @@
 .header {
+    @include flex-center;
     width: 100%;
     height: $header-height;
-    display: flex;
-    justify-content: center;
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: $z-sticky;
     background-color: white;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
 
@@ -104,12 +105,6 @@
                     color: white;
                     background: $brand-blue;
                 }
-            }
-
-            .headerUser {
-                @include unselectable;
-                margin-left: 20px;
-                cursor: pointer;
             }
 
             @include phone {
