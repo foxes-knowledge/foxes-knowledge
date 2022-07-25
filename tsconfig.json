@@ -5,7 +5,7 @@
             "@/*": ["components/*"],
             "styles/*": ["shared/styles/*"],
             "types/*": ["shared/@types/*"],
-            "redux/*": ["redux/*"],
+            "zustand/*": ["zustand/*"],
             "#/*": ["shared/*"]
         },
         "strict": true,
