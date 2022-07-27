@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
 
-import { useSessionStore } from 'zustand/session'
+import { useTokenStore } from 'zustand/token'
+import { useUserStore } from 'zustand/user'
 import { Header } from './Header'
 
 type Props = {
@@ -13,10 +14,12 @@ type Props = {
 }
 
 export const PageLayout: React.FC<Props> = ({ title, className, session, children, mode }) => {
-    const setSession = useSessionStore(state => state.setSession)
+    const setToken = useTokenStore(state => state.setToken)
+    const setUser = useUserStore(state => state.setUser)
 
     useEffect(() => {
-        session && setSession(session)
+        session && setUser(session.user!)
+        session && setToken(session.token!)
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     return (

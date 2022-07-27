@@ -12,8 +12,9 @@ import { MarkdownBar } from '@/Markdown/MarkdownBar'
 import { markdownHandler } from '#/lib/markdown'
 import { tagStyles } from '#/lib/react-select'
 import { useToast } from '#/modules/toaster/Toaster'
-import { useSessionStore } from 'zustand/session'
+import { useTokenStore } from 'zustand/token'
 
+import { client } from '#/lib/fetch'
 import style from './postEditor.module.scss'
 
 type Mode = 'preview' | 'edit'
@@ -28,10 +29,10 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
     const [content, setContent] = useState(post?.content || '')
     const parentState = useState(post?.parent || null)
 
-    const router = useRouter()
     const { promise } = useToast()
+    const router = useRouter()
+    const token = useTokenStore(state => state.token)
     const contentRef = useRef<HTMLTextAreaElement>(null)
-    const session = useSessionStore()
 
     const handleModeChange: React.MouseEventHandler<HTMLButtonElement> = ({ currentTarget }) => {
         setMode(currentTarget.name as Mode)
@@ -55,19 +56,11 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
         e.preventDefault()
         promise({
             title: 'Creating...',
-            promise: fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `${session.token.type} ${session.token!.value}`,
-                },
-                body: JSON.stringify({
-                    user_id: session.user.id,
-                    title: title,
-                    content: content,
-                    tag_ids: tags.map(tag => tag.id),
-                    parent_id: parentState[0]?.id,
-                }),
+            promise: client.post<Post>('/posts', {
+                title: title,
+                content: content,
+                tag_ids: tags.map(tag => tag.id),
+                parent_id: parentState[0]?.id,
             }),
             onSuccess: data => router.push(`/p/${data.id}`),
         })
@@ -77,7 +70,7 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
         new Promise<Tag[]>(async resolve => {
             const tags = (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?search=${search}`, {
                 headers: {
-                    Authorization: `${session.token.type} ${session.token.value}`,
+                    Authorization: `${token.type} ${token.value}`,
                 },
             }).then(res => res.json())) as Tag[]
 
