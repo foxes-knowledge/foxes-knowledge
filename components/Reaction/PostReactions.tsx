@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Heart, HeartBroken, HeartBrokenFilled, HeartFilled } from '#/icons/Misc'
 import { countBy } from '#/lib/countBy'
-import { useTokenStore } from 'zustand/token'
-import { useUserStore } from 'zustand/user'
+import { client } from '#/lib/fetch'
+import { useSessionStore } from 'zustand/session'
 
 import { PostReaction } from './PostReaction'
 
@@ -15,26 +15,19 @@ type Props = {
 }
 
 export const PostReactions: React.FC<Props> = ({ pid, reactions }) => {
-    const userId = useUserStore(state => state.user.id)
-    const token = useTokenStore(state => state.token)
-    const [reacted, setReacted] = useState(
-        reactions.find(reaction => reaction.user_id === userId)?.type
+    const userId = useSessionStore(state => state.user.id)
+    const [reacted, setReacted] = useState<'upvote' | 'downvote'>()
+
+    useEffect(
+        () => setReacted(reactions.find(reaction => reaction.user_id === userId)?.type),
+        [reactions, userId]
     )
 
     const handleReaction: React.MouseEventHandler<HTMLButtonElement> = async ({
         currentTarget,
     }) => {
         const type = currentTarget.name as ReactionType
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${pid}/reactions`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `${token.type} ${token.value}`,
-            },
-            body: JSON.stringify({
-                type,
-            }),
-        })
+        await client.post(`/posts/${pid}/reactions`, { type })
         setReacted(type)
     }
 

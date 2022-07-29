@@ -1,7 +1,8 @@
 import * as Typography from '#/icons/Typography'
-import { Tooltip } from '#/modules/tooltip/Tooltip'
+import { Tooltip } from '#/modules/Tooltip'
 import { IconBtn } from '@/Buttons/IconBtn'
 import { MarkdownBtn } from '@/Buttons/MarkdownBtn'
+
 import style from './markdownBar.module.scss'
 
 type Props = {

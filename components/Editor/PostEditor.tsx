@@ -9,12 +9,11 @@ import { NewPostSettingsDropdown } from '@/Dropdowns/NewPostSettingsDropdown'
 import { InputSubmit } from '@/Inputs/InputSubmit'
 import { MarkdownBar } from '@/Markdown/MarkdownBar'
 
+import { client } from '#/lib/fetch'
 import { markdownHandler } from '#/lib/markdown'
 import { tagStyles } from '#/lib/react-select'
-import { useToast } from '#/modules/toaster/Toaster'
-import { useTokenStore } from 'zustand/token'
+import { useToast } from '#/modules/Toaster'
 
-import { client } from '#/lib/fetch'
 import style from './postEditor.module.scss'
 
 type Mode = 'preview' | 'edit'
@@ -31,7 +30,6 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
 
     const { promise } = useToast()
     const router = useRouter()
-    const token = useTokenStore(state => state.token)
     const contentRef = useRef<HTMLTextAreaElement>(null)
 
     const handleModeChange: React.MouseEventHandler<HTMLButtonElement> = ({ currentTarget }) => {
@@ -68,12 +66,7 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
 
     const loadTags = async (search: string) =>
         new Promise<Tag[]>(async resolve => {
-            const tags = (await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags?search=${search}`, {
-                headers: {
-                    Authorization: `${token.type} ${token.value}`,
-                },
-            }).then(res => res.json())) as Tag[]
-
+            const tags = await client.get<Tag[]>(`/tags?search=${search}`)
             resolve(tags.map(tag => ({ ...tag, label: tag.name, value: tag.id })))
         })
 

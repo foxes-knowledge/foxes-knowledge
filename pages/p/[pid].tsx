@@ -3,10 +3,10 @@ import { PageLayout } from '@/Layouts/PageLayout'
 import { PostBlock } from '@/Post/PostBlock'
 import { PostReactions } from '@/Reaction/PostReactions'
 
+import { client } from '#/lib/fetch'
 import { withSessionSsr } from '#/lib/session'
 import type { NextPage } from 'next'
 
-import { client } from '#/lib/fetch'
 import style from 'styles/pages/post.module.scss'
 
 type Props = {

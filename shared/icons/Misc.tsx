@@ -21,7 +21,7 @@ export const Heart = (props: React.SVGProps<SVGSVGElement>) => (
 )
 
 export const HeartFilled = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" x-label="upvoted" {...props}>
         <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -41,7 +41,7 @@ export const HeartBroken = (props: React.SVGProps<SVGSVGElement>) => (
 )
 
 export const HeartBrokenFilled = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" x-label="downvoted" {...props}>
         <path
             fillRule="evenodd"
             clipRule="evenodd"

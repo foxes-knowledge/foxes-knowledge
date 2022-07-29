@@ -11,6 +11,13 @@
 
         svg {
             fill: $dark-3;
+
+            &[x-label='upvoted'] {
+                fill: $brand-pink;
+            }
+            &[x-label='downvoted'] {
+                fill: $brand-orange;
+            }
         }
 
         &:hover {

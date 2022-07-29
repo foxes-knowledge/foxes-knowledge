@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import { Loading, Success, Warning } from '#/icons/Toast'
-import style from './toaster.module.scss'
+import style from './index.module.scss'
 
 type Toast = {
     loading: (message?: string) => void

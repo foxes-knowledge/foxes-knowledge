@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import style from './tooltip.module.scss'
+import style from './index.module.scss'
 
 type Props = {
     content: string

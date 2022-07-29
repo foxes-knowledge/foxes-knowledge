@@ -1,4 +1,4 @@
-import { useTokenStore } from 'zustand/token'
+import { useSessionStore } from 'zustand/session'
 
 export const client: FetchClient = {
     get: (url, options) => request(url, undefined, { ...options, method: 'GET' }),
@@ -16,8 +16,8 @@ const request: Request = (url, data, options) => {
     }
 
     if (!headers.Authorization) {
-        const store = useTokenStore.getState()
-        headers.Authorization = `${store.token.type} ${store.token.value}`
+        const { type, value } = useSessionStore.getState().token
+        headers.Authorization = `${type} ${value}`
     }
 
     return fetch(constructUrl(url, options?.local), {
@@ -58,7 +58,7 @@ type Options = Partial<{
      * @default
      * 'Content-Type': 'application/json',
      *  Accept: 'application/json',
-     *  Authorization: '' // inherited from useTokenStore unless defined
+     *  Authorization: '' // inherited from useSessionStore unless defined
      */
     readonly headers: ClientHeaders
 

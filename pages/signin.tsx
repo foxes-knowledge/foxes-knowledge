@@ -7,17 +7,15 @@ import { LabeledInput } from '@/Inputs/LabeledInput'
 import { PageLayout } from '@/Layouts/PageLayout'
 
 import { Logo } from '#/icons/Brand'
-import { withSessionSsr } from '#/lib/session'
-import { useToast } from '#/modules/toaster/Toaster'
-import { useUserStore } from 'zustand/user'
-
 import { client } from '#/lib/fetch'
+import { withSessionSsr } from '#/lib/session'
+import { useToast } from '#/modules/Toaster'
+
 import style from 'styles/pages/auth.module.scss'
 
 const SignIn: NextPage = () => {
     const router = useRouter()
     const { promise } = useToast()
-    const setUser = useUserStore(state => state.setUser)
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
@@ -31,15 +29,12 @@ const SignIn: NextPage = () => {
         promise({
             title: 'Signing in...',
             promise: client.post('/api/signin', credentials, { local: true }),
-            onSuccess: ({ user }) => {
-                setUser(user)
-                router.push('/')
-            },
+            onSuccess: () => router.push('/'),
         })
     }
 
     return (
-        <PageLayout title="Sign in" className={style.authPage} mode="inf">
+        <PageLayout title="Sign in" className={style.authPage} mode="informative">
             <article className={style.authBlock}>
                 <div className={style.logoBlock}>
                     <Logo />
