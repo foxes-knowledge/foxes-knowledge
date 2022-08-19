@@ -15,7 +15,7 @@ type Props = {
 export const PageLayout: React.FC<Props> = ({ title, className, session, children, mode }) => {
     const setSession = useSessionStore(state => state.setSession)
 
-    useEffect(() => setSession(session!), []) // eslint-disable-line
+    useEffect(() => session && setSession(session!), []) // eslint-disable-line
 
     return (
         <>
