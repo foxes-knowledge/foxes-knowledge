@@ -36,7 +36,7 @@ export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
         }
     }
 
-    const post = await client.get<Post>(`/posts/${params!.pid}`, {
+    const { data } = await client.get<Post>(`/posts/${params!.pid}`, {
         headers: {
             Authorization: `${req.session.token.type} ${req.session.token.value}`,
         },
@@ -45,7 +45,7 @@ export const getServerSideProps = withSessionSsr(async ({ req, params }) => {
     return {
         props: {
             session: req.session,
-            post,
+            post: data,
         },
     }
 })

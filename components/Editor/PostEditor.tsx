@@ -67,7 +67,7 @@ export const PostEditor: React.FC<Props> = ({ post }) => {
     const loadTags = async (search: string) =>
         new Promise<Tag[]>(async resolve => {
             const tags = await client.get<Tag[]>(`/tags?search=${search}`)
-            resolve(tags.map(tag => ({ ...tag, label: tag.name, value: tag.id })))
+            resolve(tags.data.map(tag => ({ ...tag, label: tag.name, value: tag.id })))
         })
 
     return (

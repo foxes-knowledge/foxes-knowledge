@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apk -U add --no-cache libc6-compat
 RUN corepack enable \
-    && corepack prepare pnpm@7.9.3 --activate
+    && corepack prepare pnpm@7.9.5 --activate
 
 FROM base as deps
 
@@ -18,7 +18,7 @@ COPY . .
 
 RUN pnpm build
 
-FROM node:18.7-alpine AS production
+FROM node:18.8-alpine AS production
 
 WORKDIR /app
 

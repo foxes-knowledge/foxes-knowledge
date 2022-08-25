@@ -52,8 +52,8 @@ export const getServerSideProps = withSessionSsr(async ({ req, query }) => {
     return {
         props: {
             session: req.session,
-            posts,
-            tags,
+            posts: posts.data,
+            tags: tags.data,
         },
     }
 })

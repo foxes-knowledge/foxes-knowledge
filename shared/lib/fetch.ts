@@ -24,11 +24,7 @@ const request: Request = (url, data, options) => {
         method: options!.method,
         headers,
         body: !!data ? JSON.stringify(data) : undefined,
-    }).then(async res => {
-        const json = await res.json()
-        if (!res.ok) throw json
-        return json
-    })
+    }).then(constructResponse)
 }
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL!
@@ -44,6 +40,26 @@ const constructUrl = (url: string, isLocal = false): string | never => {
     }
 
     return url
+}
+
+const constructResponse = async (res: Response) => {
+    const data = res.status === 204 ? {} : await res.json()
+
+    const result = {
+        status: res.status,
+        statusText: res.statusText,
+        data,
+    }
+
+    if (!res.ok) throw result
+    return result
+}
+
+type TemplateResponse<T> = {
+    status: number
+    statusText: string
+    message?: string
+    data: T
 }
 
 type Options = Partial<{
@@ -76,13 +92,9 @@ type ClientHeaders = Partial<{
     Authorization: string
 }>
 
-type Request = <T>(
-    url: string,
-    data?: object,
-    options?: Options
-) => Promise<T & { message: string }>
+type Request = <T>(url: string, data?: object, options?: Options) => Promise<TemplateResponse<T>>
 
-type DatalessRequest = <T>(url: string, options?: Options) => Promise<T & { message: string }>
+type DatalessRequest = <T>(url: string, options?: Options) => Promise<TemplateResponse<T>>
 
 interface FetchClient {
     get: DatalessRequest

@@ -20,8 +20,8 @@ export const NewPostSettingsDropdown: React.FC<Props> = ({ parentState }) => {
 
     const loadPosts = async (search: string) =>
         new Promise<Post[]>(async resolve => {
-            const posts = await client.get<Paginated<Post>>(`/posts?search=${search}`)
-            resolve(posts.data.map(post => ({ ...post, label: post.title, value: post.id })))
+            const { data } = await client.get<Paginated<Post>>(`/posts?search=${search}`)
+            resolve(data.data.map(post => ({ ...post, label: post.title, value: post.id })))
         })
 
     return (
