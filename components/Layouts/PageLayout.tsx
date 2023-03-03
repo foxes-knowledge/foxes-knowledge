@@ -9,22 +9,20 @@ type Props = {
     className: string
     session?: Session
     children: React.ReactNode
-    mode?: 'cont' | 'inf'
+    mode?: 'contentful' | 'informative'
 }
 
 export const PageLayout: React.FC<Props> = ({ title, className, session, children, mode }) => {
     const setSession = useSessionStore(state => state.setSession)
 
-    useEffect(() => {
-        session && setSession(session)
-    }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    useEffect(() => session && setSession(session!), []) // eslint-disable-line
 
     return (
         <>
             <Head>
-                <title>{title! + (mode === 'cont' ? ' ∣ Foxes Knowledge' : '')}</title>
+                <title>{title + (mode === 'contentful' ? ' ∣ Foxes Knowledge' : '')}</title>
             </Head>
-            {mode === 'cont' && <Header user={session?.user!} />}
+            {mode === 'contentful' && <Header user={session?.user!} />}
             <div className={className}>{children}</div>
         </>
     )
@@ -32,5 +30,5 @@ export const PageLayout: React.FC<Props> = ({ title, className, session, childre
 
 PageLayout.defaultProps = {
     title: 'Foxes Knowledge',
-    mode: 'cont',
+    mode: 'contentful',
 }

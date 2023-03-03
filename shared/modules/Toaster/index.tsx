@@ -1,25 +1,24 @@
-import { Loading, Success, Warning } from '#/icons/Toast'
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import style from './toaster.module.scss'
 
-const ProviderContext = createContext<Toast>(null!)
-export const useToast = () => useContext(ProviderContext)
+import { Loading, Success, Warning } from '#/icons/Toast'
+import style from './index.module.scss'
 
-interface ToastPromise {
-    promise: Promise<Response>
-    title?: string
-    onSuccess?: (res: ResponseData) => void
-    onError?: (err: ResponseData) => void
-}
-
-interface Toast {
+type Toast = {
     loading: (message?: string) => void
     success: (message?: string) => void
     error: (message?: string) => void
-    promise: (params: ToastPromise) => void
+    promise: (params: {
+        promise: Promise<any>
+        title?: string
+        onSuccess?: (res: any) => void
+        onError?: (err: any) => void
+    }) => void
     clear: () => void
 }
+
+const ProviderContext = createContext<Toast>(null!)
+export const useToast = () => useContext(ProviderContext)
 
 export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [rendered, setRendered] = useState(false)
@@ -33,37 +32,35 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return () => setMounted(false)
     }, [])
 
-    const promise = ({ promise, title, onSuccess, onError }: ToastPromise) => {
+    const promise: Toast['promise'] = ({ promise, title, onSuccess, onError }) => {
         setTitle(title ? title : 'Processing...')
         setIcon(<Loading className={style.spinAnimation} />)
         setRendered(true)
         promise
-            .then(async (res: Response) => {
-                const json = (await res.json()) as ResponseData
-                if (!res.ok) throw json
-                success(json.message)
-                onSuccess && onSuccess(json)
+            .then(res => {
+                success(res.message)
+                onSuccess && onSuccess(res)
             })
-            .catch((err: ResponseData) => {
+            .catch(err => {
                 error(err.name === 'SyntaxError' ? 'Server offline' : err.message)
                 onError && onError(err)
             })
     }
 
-    const loading = (message?: string) => {
+    const loading: Toast['loading'] = message => {
         message ? setTitle(message) : setTitle('Processing...')
         setIcon(<Loading className={style.spinAnimation} />)
         setRendered(true)
     }
 
-    const success = (message?: string) => {
+    const success: Toast['success'] = message => {
         message ? setTitle(message) : setTitle('Success')
         setIcon(<Success />)
         setRendered(true)
         setTimeout(clear, 5000)
     }
 
-    const error = (message?: string) => {
+    const error: Toast['error'] = message => {
         if (!message) setTitle('Something went wrong')
         else
             setTitle(
@@ -85,7 +82,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         setTimeout(clear, 5000)
     }
 
-    const clear = () => {
+    const clear: Toast['clear'] = () => {
         if (!ref.current) return
         ref.current.className = `${style.toast} ${style.popDownAnimation}`
         ref.current.onanimationend = () => setRendered(false)

@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-import { useToast } from '#/modules/toaster/Toaster'
+import { client } from '#/lib/fetch'
+import { Dropdown } from '#/modules/Dropdown'
 import { SimpleImage } from '@/SimpleImage/SimpleImage'
 import style from './headerDropdown.module.scss'
 
@@ -13,22 +14,15 @@ type Props = {
 
 export const HeaderDropdown: React.FC<Props> = ({ user }) => {
     const [rendered, setRendered] = useState(false)
-    const { success } = useToast()
     const router = useRouter()
 
-    const switchState: React.MouseEventHandler<HTMLButtonElement> = () => setRendered(a => !a)
+    const handleRender: React.MouseEventHandler<HTMLButtonElement> = () => setRendered(a => !a)
 
-    const handleLogOut: React.MouseEventHandler<HTMLButtonElement> = async () => {
-        success('Goodbye!')
-        await fetch('/api/signout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-        })
-        router.push('/guest')
-    }
+    const handleLogOut: React.MouseEventHandler<HTMLButtonElement> = () =>
+        client.post('/api/signout', {}, { local: true }).then(() => router.push('/guest'))
 
     return (
-        <div style={{ display: 'inline-block', position: 'relative' }}>
+        <Dropdown rendered={rendered} handleRender={handleRender}>
             {rendered && (
                 <ul className={style.dropdown}>
                     <li className={style.dropdownItem}>
@@ -55,7 +49,7 @@ export const HeaderDropdown: React.FC<Props> = ({ user }) => {
                     </li>
                 </ul>
             )}
-            <button className={style.headerUser} onClick={switchState}>
+            <button className={style.headerUser} onClick={handleRender}>
                 {user.picture ? (
                     <Image src={user.picture} alt="profile_picture" />
                 ) : (
@@ -66,6 +60,6 @@ export const HeaderDropdown: React.FC<Props> = ({ user }) => {
                     />
                 )}
             </button>
-        </div>
+        </Dropdown>
     )
 }

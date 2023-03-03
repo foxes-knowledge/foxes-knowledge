@@ -11,6 +11,17 @@
 
         svg {
             fill: $dark-3;
+
+            &[x-label='upvoted'] {
+                fill: $brand-pink;
+            }
+            &[x-label='downvoted'] {
+                fill: $brand-orange;
+            }
+        }
+
+        &:disabled {
+            opacity: 0.5;
         }
 
         &:hover {

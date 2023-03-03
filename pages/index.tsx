@@ -2,11 +2,12 @@ import { withSessionSsr } from '#/lib/session'
 import { PageLayout } from '@/Layouts/PageLayout'
 import { NavigationBar } from '@/Navigation/NavigationBar'
 
-import type { NextPage } from 'next'
-
+import { client } from '#/lib/fetch'
 import { queryBuilder } from '#/lib/queryBuilder'
 import { HomeAside } from '@/Asides/HomeAside'
 import { PostList } from '@/Post/PostList'
+import type { NextPage } from 'next'
+
 import style from 'styles/pages/index.module.scss'
 
 type Props = {
@@ -37,26 +38,22 @@ export const getServerSideProps = withSessionSsr(async ({ req, query }) => {
         }
     }
 
-    const fetchOptions = {
+    const options = {
         headers: {
             Authorization: `${req.session.token.type} ${req.session.token.value}`,
         },
     }
 
     const [posts, tags] = await Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts${queryBuilder(query)}`, fetchOptions).then(
-            data => data.json() as unknown as Paginated<Post>
-        ),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags/top`, fetchOptions).then(
-            data => data.json() as unknown as Tag[]
-        ),
+        client.get<Paginated<Post>>(`/posts${queryBuilder(query)}`, options),
+        client.get<Tag[]>('/tags/top', options),
     ])
 
     return {
         props: {
             session: req.session,
-            posts,
-            tags,
+            posts: posts.data,
+            tags: tags.data,
         },
     }
 })

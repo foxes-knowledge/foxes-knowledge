@@ -1,15 +1,21 @@
-import { Logo } from '#/icons/Brand'
-import { withSessionSsr } from '#/lib/session'
-import { InputSubmit } from '@/Inputs/InputSubmit'
-import { LabeledInput } from '@/Inputs/LabeledInput'
-import { PageLayout } from '@/Layouts/PageLayout'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+
+import { InputSubmit } from '@/Inputs/InputSubmit'
+import { LabeledInput } from '@/Inputs/LabeledInput'
+import { PageLayout } from '@/Layouts/PageLayout'
+
+import { Logo } from '#/icons/Brand'
+import { client } from '#/lib/fetch'
+import { withSessionSsr } from '#/lib/session'
+import { useToast } from '#/modules/Toaster'
+
 import style from 'styles/pages/auth.module.scss'
 
 const SignUp: NextPage = () => {
     const router = useRouter()
+    const { promise } = useToast()
     const [credentials, setCredentials] = useState({
         username: '',
         name: '',
@@ -21,18 +27,17 @@ const SignUp: NextPage = () => {
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) =>
         setCredentials({ ...credentials, [target.name]: target.value })
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit: React.FormEventHandler = e => {
         e.preventDefault()
-        await fetch('/api/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(credentials),
+        promise({
+            title: 'Signing up...',
+            promise: client.post('/api/signup', credentials),
+            onSuccess: () => router.push('/'),
         })
-        router.push('/')
     }
 
     return (
-        <PageLayout title="Sign up" className={style.authPage} mode="inf">
+        <PageLayout title="Sign up" className={style.authPage} mode="informative">
             <div className={style.authBlock}>
                 <div className={style.logoBlock}>
                     <Logo />

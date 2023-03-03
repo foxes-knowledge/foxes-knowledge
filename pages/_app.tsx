@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Router from 'next/router'
 import nprogress from 'nprogress'
 
-import { ToastProvider } from '#/modules/toaster/Toaster'
+import { ToastProvider } from '#/modules/Toaster'
 import type { AppProps } from 'next/app'
 
 import 'styles/globals.css'

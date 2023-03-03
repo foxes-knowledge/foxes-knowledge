@@ -2,10 +2,10 @@ import { useState } from 'react'
 import AsyncSelect from 'react-select/async'
 
 import { Settings } from '#/icons/Misc'
+import { client } from '#/lib/fetch'
+import { Dropdown } from '#/modules/Dropdown'
 import { IconBtn } from '@/Buttons/IconBtn'
 import { TextBtn } from '@/Buttons/TextButton'
-
-import { useSessionStore } from 'zustand/session'
 
 import style from './newPostSettings.module.scss'
 
@@ -15,26 +15,17 @@ type Props = {
 
 export const NewPostSettingsDropdown: React.FC<Props> = ({ parentState }) => {
     const [rendered, setRendered] = useState(false)
-    const token = useSessionStore(state => state.token)
 
-    const handleDone: React.MouseEventHandler<HTMLButtonElement> = () => setRendered(a => !a)
+    const handleRender: React.MouseEventHandler<HTMLButtonElement> = () => setRendered(a => !a)
 
     const loadPosts = async (search: string) =>
         new Promise<Post[]>(async resolve => {
-            const posts = (await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/posts?search=${search}`,
-                {
-                    headers: {
-                        Authorization: `${token.type} ${token.value}`,
-                    },
-                }
-            ).then(res => res.json())) as Paginated<Post>
-
-            resolve(posts.data.map(post => ({ ...post, label: post.title, value: post.id })))
+            const { data } = await client.get<Paginated<Post>>(`/posts?search=${search}`)
+            resolve(data.data.map(post => ({ ...post, label: post.title, value: post.id })))
         })
 
     return (
-        <div style={{ display: 'inline-block', position: 'relative' }}>
+        <Dropdown rendered={rendered} handleRender={handleRender}>
             {rendered && (
                 <div className={style.dropdown}>
                     <h1 className={style.heading}>Post options</h1>
@@ -54,16 +45,16 @@ export const NewPostSettingsDropdown: React.FC<Props> = ({ parentState }) => {
                             loadOptions={loadPosts}
                         />
                     </div>
-                    <TextBtn name="done" content="Done" onClick={handleDone} />
+                    <TextBtn name="done" content="Done" onClick={handleRender} />
                 </div>
             )}
             <IconBtn
-                name="optipns"
+                name="options"
                 active={rendered}
                 Icon={Settings}
-                onClick={handleDone}
+                onClick={handleRender}
                 title="Options"
             />
-        </div>
+        </Dropdown>
     )
 }

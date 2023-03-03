@@ -1,10 +1,13 @@
 declare interface Reaction extends Entity {
-    post?: Post
-    comment?: Comment
-    type: 'upvote' | 'downvote'
+    user_id: number
+    post_id?: number
+    comment_id?: number
+    type: ReactionType
 }
 
 declare interface ReactionCount {
     upvote: number
     downvote: number
 }
+
+declare type ReactionType = 'upvote' | 'downvote'

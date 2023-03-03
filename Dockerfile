@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apk -U add --no-cache libc6-compat
 RUN corepack enable \
-    && corepack prepare pnpm@7.5.0 --activate
+    && corepack prepare pnpm@7.9.5 --activate
 
 FROM base as deps
 
@@ -18,25 +18,23 @@ COPY . .
 
 RUN pnpm build
 
-FROM node:18.6-alpine AS production
+FROM node:18.8-alpine AS production
 
 WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN addgroup --system --gid 1001 nodejs \
-    && adduser --system --uid 1001 fox
-
 COPY --from=build /app/public ./public
 COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/next.config.js ./next.config.js
 
-COPY --from=build --chown=fox:nodejs /app/.next/standalone ./
-COPY --from=build --chown=fox:nodejs /app/.next/static ./.next/static
+COPY --from=build --chown=node:node /app/.next/standalone ./
+COPY --from=build --chown=node:node /app/.next/static ./.next/static
 
-USER fox
-EXPOSE 80
-ENV PORT 80
+USER node
+ARG PORT=80
+EXPOSE $PORT
+ENV PORT $PORT
 
 CMD ["node", "server.js"]

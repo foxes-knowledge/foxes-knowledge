@@ -5,7 +5,7 @@ import Link from 'next/link'
 import style from 'styles/pages/guest.module.scss'
 
 const Guest: NextPage = () => (
-    <PageLayout title="Foxes Knowledge" className={style.guestPage} mode="inf">
+    <PageLayout title="Foxes Knowledge" className={style.guestPage} mode="informative">
         <div className={style.logoBlock}>
             <Logo width={256} />
             <h1>Foxes / Knowledge</h1>

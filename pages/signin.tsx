@@ -1,12 +1,16 @@
-import { Logo } from '#/icons/Brand'
-import { withSessionSsr } from '#/lib/session'
-import { useToast } from '#/modules/toaster/Toaster'
-import { InputSubmit } from '@/Inputs/InputSubmit'
-import { LabeledInput } from '@/Inputs/LabeledInput'
-import { PageLayout } from '@/Layouts/PageLayout'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+
+import { InputSubmit } from '@/Inputs/InputSubmit'
+import { LabeledInput } from '@/Inputs/LabeledInput'
+import { PageLayout } from '@/Layouts/PageLayout'
+
+import { Logo } from '#/icons/Brand'
+import { client } from '#/lib/fetch'
+import { withSessionSsr } from '#/lib/session'
+import { useToast } from '#/modules/Toaster'
+
 import style from 'styles/pages/auth.module.scss'
 
 const SignIn: NextPage = () => {
@@ -16,25 +20,22 @@ const SignIn: NextPage = () => {
         email: '',
         password: '',
     })
+
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) =>
         setCredentials({ ...credentials, [target.name]: target.value })
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         promise({
             title: 'Signing in...',
-            promise: fetch('/api/signin', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(credentials),
-            }),
+            promise: client.post('/api/signin', credentials, { local: true }),
             onSuccess: () => router.push('/'),
         })
     }
 
     return (
-        <PageLayout title="Sign in" className={style.authPage} mode="inf">
-            <div className={style.authBlock}>
+        <PageLayout title="Sign in" className={style.authPage} mode="informative">
+            <article className={style.authBlock}>
                 <div className={style.logoBlock}>
                     <Logo />
                     <h1 className={style.logoHeading}>
@@ -57,7 +58,7 @@ const SignIn: NextPage = () => {
                     />
                     <InputSubmit label="Continue" />
                 </form>
-            </div>
+            </article>
         </PageLayout>
     )
 }

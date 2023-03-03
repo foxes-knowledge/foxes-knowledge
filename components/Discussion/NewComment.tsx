@@ -13,7 +13,6 @@ export const NewComment: React.FC = () => {
 
     const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
         e.preventDefault()
-        console.log(content)
     }
 
     return (
@@ -31,12 +30,9 @@ export const NewComment: React.FC = () => {
             <div className={style.buttons}>
                 <picture className={style.user}>
                     {user.picture ? (
-                        <Image src={user.picture!} alt="user_picture" width={35} height={35} />
+                        <Image src={user.picture} alt="user_picture" width={35} height={35} />
                     ) : (
-                        <SimpleImage
-                            username={user.username || 'username'}
-                            color={user.color || '#ffffff'}
-                        />
+                        <SimpleImage username={user.username} color={user.color} />
                     )}
                 </picture>
                 <input type="submit" value="Comment" className={style.submit} />
